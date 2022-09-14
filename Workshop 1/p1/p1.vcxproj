@@ -132,7 +132,11 @@
     <Text Include="sample_output.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="carads.cpp" />
     <ClCompile Include="w1_p1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="carads.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
