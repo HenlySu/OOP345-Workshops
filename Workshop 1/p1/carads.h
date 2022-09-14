@@ -13,25 +13,24 @@ provided to complete the workshops and assignments.
 #include <iostream>
 
 namespace sdds {
-
-   void listArgs(int argc, char* argv[], char* env[]);
-
-   extern double g_taxrate = 0.0;
-   extern double g_discount = 0.0;
+   void listArgs(int argc, char* argv[]);
 
    class Cars {
    private:
-      char carBrand[10]{};
-      char carModel[15]{};
-      int carYear = 0;
-      double carPrice = 0.0;
-      char carStatus = '\0';
-      bool carPromotion = false;
+      double carPrice;
+      char carBrand[10];
+      char carModel[15];
+      int carYear;
+      char carStatus;
+      bool carPromotion;
    public:
       Cars();
-      void read(std::istream& is); 
+      void read(std::istream& is);
       void display(bool reset);
       char getStatus();
    };
 }
+
+extern double g_taxrate;
+extern double g_discount;
 #endif // !CARADS_H
