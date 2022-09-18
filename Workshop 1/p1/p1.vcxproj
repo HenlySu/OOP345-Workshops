@@ -129,6 +129,7 @@
   <ItemGroup>
     <Text Include="ad1.txt" />
     <Text Include="ad2.txt" />
+    <Text Include="reflect.txt" />
     <Text Include="sample_output.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,6 @@ namespace sdds {
       char getStatus();
    };
 }
-
 extern double g_taxrate;
 extern double g_discount;
 #endif // !CARADS_H

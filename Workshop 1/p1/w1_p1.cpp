@@ -24,6 +24,9 @@ int cout = 0; // this is intentional
 //         to accept command line arguments
 int main(int argc, char* argv[])
 {
+	double g_taxrate;
+	double g_discount;
+
 	// will break compilation if best practices about namespaces are ignored
 	cout = 1;
 
