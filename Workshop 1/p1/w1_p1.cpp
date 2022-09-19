@@ -24,9 +24,6 @@ int cout = 0; // this is intentional
 //         to accept command line arguments
 int main(int argc, char* argv[])
 {
-	double g_taxrate;
-	double g_discount;
-
 	// will break compilation if best practices about namespaces are ignored
 	cout = 1;
 
@@ -52,12 +49,12 @@ int main(int argc, char* argv[])
 
 		// Rates change from ad 1 to ad 2
 		if (ad == 1) { // special day! no tax for all cars and 10% discount for applicable cars!
-			g_taxrate = 0;
-			g_discount = 0.10;
+			sdds::g_taxrate = 0;
+			sdds::g_discount = 0.10;
 		}
 		else {
-			g_taxrate = 0.13;
-			g_discount = 0.05;
+			sdds::g_taxrate = 0.13;
+			sdds::g_discount = 0.05;
 		}
 
 		// each parameter contains the orders from one day, process each one at a time

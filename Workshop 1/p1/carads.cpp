@@ -13,9 +13,13 @@ provided to complete the workshops and assignments.
 #include "carads.h"
 
 namespace sdds {
+
+   double g_discount = 0;
+   double g_taxrate = 0;
+
    void listArgs(int argc, char* argv[]) {
       std::cout << "Commmand Line:\n"
-         << "--------------------------";
+         << "--------------------------\n";
       for (int i = 0; i < argc; i++) {
          std::cout << i + 1 << ": " << argv[i] << std::endl;
       }
@@ -30,41 +34,49 @@ namespace sdds {
       carPromotion = false;
    }
    void Cars::read(std::istream& is) {
-      if (!is.fail()) {
+
+      char discount_status = '\0';
+
+      if (is.good()){
          is >> carStatus;
-         is.get();
-         is >> carBrand;
-         is.get();
-         is >> carModel;
-         is.get();
+         is.ignore();
+         is.get(carBrand, 10, ',');
+         is.ignore();
+         is.get(carModel, 15, ',');
+         is.ignore();
          is >> carYear;
-         is.get();
+         is.ignore();
          is >> carPrice;
-         is.get();
-         is >> carPromotion;
-         is.get();
+         is.ignore();
+         is >> discount_status;
+         is.ignore();
+
+         carPromotion = discount_status == 'Y' ? true : false;
       }
-   //<Order Tag>,<Car Brand>,<Car Model>,<Year>,<Price>,<Discount status>
    }
    void Cars::display(bool reset) {
+
       static int counter = 0;
-      std::cout.width(2);
-      std::cout << counter;
-      std::cout.width(10);
-      std::cout << carBrand;
-      std::cout.width(15);
-      std::cout << carModel;
-      std::cout.width(4);
-      std::cout << carYear;
-      std::cout.setf(std::ios::fixed);
-      std::cout.width(12);
-      std::cout.precision(2);
-      std::cout << carPrice;
-      std::cout.width(12);
-      if (carPromotion = true) {
-         std::cout << carPrice * 0.9;
+      reset == true ? counter = 0 : counter;
+
+      std::cout << std::setw(2) << std::left << ++counter << ". ";
+
+      if (carBrand[0]) {
+         std::cout << std::setw(10) << std::left << carBrand << "| ";
+         std::cout << std::setw(15) << std::left << carModel << "| ";
+         std::cout << std::setw(4) << std::right << carYear << " |";
+         std::cout << std::setw(12) << std::fixed << std::setprecision(2) << std::right << carPrice * (g_taxrate + 1) << "|";
+
+         if (carPromotion) {
+            std::cout << std::setw(12) << std::fixed << std::setprecision(2) << std::right << carPrice * (g_taxrate + 1) * (1 - g_discount);
+         }
+         std::cout << std::endl;
+      }
+      else {
+         std::cout << "No Car" << std::endl;
       }
    }
+
    char Cars::getStatus() {
       return carStatus;
    }

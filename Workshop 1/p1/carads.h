@@ -29,7 +29,8 @@ namespace sdds {
       void display(bool reset);
       char getStatus();
    };
+
+   extern double g_taxrate;
+   extern double g_discount;
 }
-extern double g_taxrate;
-extern double g_discount;
 #endif // !CARADS_H
