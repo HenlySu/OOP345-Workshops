@@ -18,11 +18,12 @@ namespace sdds {
    double g_taxrate = 0;
 
    void listArgs(int argc, char* argv[]) {
-      std::cout << "Commmand Line:\n"
+      std::cout << "Command Line:\n"
          << "--------------------------\n";
       for (int i = 0; i < argc; i++) {
-         std::cout << i + 1 << ": " << argv[i] << std::endl;
+         std::cout << std::setw(3) << i + 1 << ": " << argv[i] << std::endl;
       }
+      std::cout << "--------------------------\n\n";
    }
 
    Cars::Cars() {
