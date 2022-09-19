@@ -35,7 +35,7 @@ namespace sdds {
    }
    void Cars::read(std::istream& is) {
 
-      char discount_status = '\0';
+      char promotion = '\0';
 
       if (is.good()){
          is >> carStatus;
@@ -48,15 +48,16 @@ namespace sdds {
          is.ignore();
          is >> carPrice;
          is.ignore();
-         is >> discount_status;
+         is >> promotion;
          is.ignore();
 
-         carPromotion = discount_status == 'Y' ? true : false;
+         carPromotion = promotion == 'Y' ? true : false;
       }
    }
    void Cars::display(bool reset) {
 
       static int counter = 0;
+
       reset == true ? counter = 0 : counter;
 
       std::cout << std::setw(2) << std::left << ++counter << ". ";
