@@ -1,0 +1,25 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+To understand the difference between internal linkage and external linkages we must
+first understand what our compiler does whenever we compile our code. Whenever we 
+create an implememtation file (.cpp), the compiler creates something called a 
+translation unit. Internal linkage refers to everything in the scope of the 
+translation unit and External linkage refers to to things that are beyond the scope
+of a particular translation unit. Making it accessible throughout the entire program.
+An example of internal linkage is the static keyword and an example of external 
+linkage is the extern keyword. The static keyword creates a variable that exist 
+in the particular translation unit for the entire lifetime of the program. The 
+extern keyword creates variable that is accessible throughout the program in other
+words making it global. In part 2 of the workshop, we made an update to the cars class to 
+accept a brand name of any length. We did this by using dynamically allocated 
+arrays. We also implemented the rule of three which includes the copy contructor,
+copy assignment operator and the destructor. We also implemented two global functions.
+The keyword constexpr is used to express that the variable can be used in a constant
+expression. Simply, in an expression that is evaluated at compile time.
