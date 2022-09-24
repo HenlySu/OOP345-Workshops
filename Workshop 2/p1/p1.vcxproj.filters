@@ -28,6 +28,9 @@
     <ClCompile Include="w2_p1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TennisLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TennisLog.h">

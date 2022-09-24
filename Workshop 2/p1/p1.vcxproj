@@ -133,6 +133,7 @@
     <None Include="tennis-data.csv" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TennisLog.cpp" />
     <ClCompile Include="w2_p1.cpp" />
   </ItemGroup>
   <ItemGroup>

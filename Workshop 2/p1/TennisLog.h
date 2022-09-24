@@ -12,24 +12,35 @@ provided to complete the workshops and assignments.
 
 namespace sdds {
    class TennisMatch {
-      std::string tournamentID;
-      std::string tournamentName;
-      unsigned int matchID;
-      std::string matchWinner;
-      std::string matchLoser;
    public:
-      friend std::ostream& operator << (std::ostream& os, const TennisMatch tennisMatch);
+      std::string tournamentID = {};
+      std::string tournamentName = {};
+      size_t matchID = {};
+      std::string matchWinner = {};
+      std::string matchLoser = {};
    };
 
    class TennisLog {
       TennisMatch* tennisMatches;
+      size_t numMatches;
    public:
+      //Constructors
       TennisLog();
       TennisLog(const char* filename);
-      void addMatch(TennisMatch& tennisMatch);
-      TennisLog& findMatches(const char* playername);
-      
 
+      //Rule of 3
+      TennisLog(const TennisLog& obj);
+      TennisLog& operator = (TennisLog& obj);
+      ~TennisLog();
+
+      //Rule of 5 for part 2
+      //TennisLog(TennisLog&& obj);
+      //TennisLog& operator = (TennisLog&& obj);
+
+      void addMatch(TennisMatch& tennisMatch);
+      TennisLog findMatches(const char* playername);
+      TennisMatch operator [] (size_t index);
+      operator size_t();
    };
 }
 #endif // !TENNISLOG_H
