@@ -30,7 +30,7 @@ namespace sdds {
 
       //Rule of 3
       TennisLog(const TennisLog& obj);
-      TennisLog& operator = (TennisLog& obj);
+      TennisLog& operator = (const TennisLog& obj);
       ~TennisLog();
 
       //Rule of 5 for part 2
@@ -42,5 +42,7 @@ namespace sdds {
       TennisMatch operator [] (size_t index);
       operator size_t();
    };
+
+   std::ostream& operator << (std::ostream& os, TennisMatch tennisMatch);
 }
 #endif // !TENNISLOG_H
