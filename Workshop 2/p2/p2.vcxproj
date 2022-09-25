@@ -139,6 +139,7 @@
     <None Include="tennis-data.csv" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="reflect.txt" />
     <Text Include="sample_output.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,0 +1,30 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+The reason for the significant time difference between the copy and move operation
+is that when the copy operation is called, it copies all of its resources and the 
+move operation only the reference is moved from the old object to the new object
+without the need to allocate any memory.
+
+The approach that I used to read the input file (tennis-data.csv) in the TennisLog
+Constructor is by using a while loop to loop to the end of the file to get the 
+total number of matches. I then dynamically allocated an array with the total number
+of matches that was retrieved from the while loop. Then I had to clear and reset the
+file so that it starts reading from the beginning again. I used a getline to retrieve 
+the first line from the file. Then I used a for loop and temp TennisMatch instance 
+to loop through the file and entering the information in to the temp object. At the 
+end I used the assignment operator to assign it to the current attribute. I believe 
+I could have done this without rereading the file by looping through the file, incrementing
+the number of matches and allocating memory for each row of the file.
+
+In the chrono library the difference between steady_clock and system_clock is that 
+steady_clock acts more like a stopwatch and system_clock acts more like a watch.
+They are completely different and serves different purposes. Steady_clock is usually 
+used to time operations and system_clock would be used to tell time. Don't get me 
+wrong here, system_clock can still be used to time operations but it is less accurate
+compared to steady_clock.

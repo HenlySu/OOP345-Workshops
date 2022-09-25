@@ -33,8 +33,8 @@ namespace sdds {
       ~TennisLog();
 
       //Rule of 5
-      TennisLog(TennisLog&& obj);
-      TennisLog& operator = (TennisLog&& obj);
+      TennisLog(TennisLog&& obj) noexcept;
+      TennisLog& operator = (TennisLog&& obj) noexcept;
 
       void addMatch(TennisMatch& tennisMatch);
       TennisLog findMatches(const char* playername);

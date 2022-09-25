@@ -21,7 +21,6 @@ namespace sdds {
       duration = endTime - startTime;
 
       auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(duration);
-      long long int ns = nanoseconds.count();
-      return ns;
+      return nanoseconds.count();
    }
 }

@@ -37,7 +37,7 @@ namespace sdds {
 
          std::getline(fp, line); // Skip first line
 
-         for (int i = 0; i < numMatches; i++) {
+         for (size_t i = 0; i < numMatches; i++) {
             TennisMatch tempMatch{};
             std::getline(fp, tempMatch.tournamentID, ',');
             std::getline(fp, tempMatch.tournamentName, ',');
@@ -63,7 +63,7 @@ namespace sdds {
          numMatches = obj.numMatches;
          tennisMatches = new TennisMatch[numMatches];
 
-         for (int i = 0; i < numMatches; i++) {
+         for (size_t i = 0; i < numMatches; i++) {
             tennisMatches[i] = obj.tennisMatches[i];
          }
       }
@@ -82,7 +82,7 @@ namespace sdds {
       numMatches++;
       TennisMatch* temp = new TennisMatch[numMatches];
 
-      for (int i = 0; i < (numMatches - 1); i++) {
+      for (size_t i = 0; i < (numMatches - 1); i++) {
          temp[i] = tennisMatches[i];
       }
       temp[numMatches - 1] = tennisMatch;
@@ -96,7 +96,7 @@ namespace sdds {
    TennisLog TennisLog::findMatches(const char* playername) {
       TennisLog temp{};
       
-      for (int i = 0; i < numMatches; i++) {
+      for (size_t i = 0; i < numMatches; i++) {
          if (!strcmp(playername, tennisMatches[i].matchWinner.c_str()) || !strcmp(playername, tennisMatches[i].matchLoser.c_str())){
             temp.addMatch(tennisMatches[i]);
          }

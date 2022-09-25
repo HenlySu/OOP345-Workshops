@@ -28,13 +28,14 @@ namespace sdds {
 
       if (fp.is_open()) {
          while (std::getline(fp, line)) { numMatches++; }
-         numMatches--;
 
+         numMatches--;
          tennisMatches = new TennisMatch[numMatches];
+
          fp.clear();
          fp.seekg(0);
 
-         std::getline(fp, line); // Skip first line
+         std::getline(fp, line);
 
          for (size_t i = 0; i < numMatches; i++) {
             TennisMatch tempMatch{};
@@ -56,10 +57,8 @@ namespace sdds {
    }
    TennisLog& TennisLog::operator = (const TennisLog& obj) {
       if (this != &obj) {
-         delete[] tennisMatches;
-         tennisMatches = nullptr;
-
          numMatches = obj.numMatches;
+         delete[] tennisMatches;
          tennisMatches = new TennisMatch[numMatches];
 
          for (size_t i = 0; i < numMatches; i++) {
@@ -74,10 +73,10 @@ namespace sdds {
    }
 
    //Rule of 5 for part 2
-   TennisLog::TennisLog(TennisLog&& obj) {
-      operator=(std::move(obj));
+   TennisLog::TennisLog(TennisLog&& obj) noexcept {
+      *this = std::move(obj);
    }
-   TennisLog& TennisLog::operator = (TennisLog&& obj) {
+   TennisLog& TennisLog::operator = (TennisLog&& obj) noexcept {
       if (this != &obj) {
          delete[] tennisMatches;
          tennisMatches = obj.tennisMatches;
@@ -92,11 +91,16 @@ namespace sdds {
    void TennisLog::addMatch(TennisMatch& tennisMatch) {
       numMatches++;
       TennisMatch* temp = new TennisMatch[numMatches];
-
-      for (size_t i = 0; i < (numMatches - 1); i++) {
-         temp[i] = tennisMatches[i];
+      
+      if (tennisMatches != nullptr) {
+         for (size_t i = 0; i < (numMatches - 1); i++) {
+            temp[i] = tennisMatches[i];
+         }
+         temp[numMatches - 1] = tennisMatch;
       }
-      temp[numMatches - 1] = tennisMatch;
+      else {
+         temp[0] = tennisMatch;
+      }
 
       delete[] tennisMatches;
       tennisMatches = nullptr;
@@ -115,11 +119,7 @@ namespace sdds {
    }
    TennisMatch TennisLog::operator [] (size_t index) {
       TennisMatch emptyMatch{};
-
-      if (!(tennisMatches == nullptr)) {
-         emptyMatch = tennisMatches[index];
-      }
-      return emptyMatch;
+      return (!(tennisMatches == nullptr)) ? emptyMatch = tennisMatches[index] : emptyMatch;
    }
    TennisLog::operator size_t() {
       return numMatches;
@@ -127,11 +127,11 @@ namespace sdds {
 
    std::ostream& operator << (std::ostream& os, TennisMatch tennisMatch) {
       if (tennisMatch.matchID) {
-         os << std::setfill('.') << std::setw(23) << std::right << "Tourney ID : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.tournamentID << std::endl;
-         os << std::setfill('.') << std::setw(23) << std::right << "Match ID : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.matchID << std::endl;
-         os << std::setfill('.') << std::setw(23) << std::right << "Tourney : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.tournamentName << std::endl;
-         os << std::setfill('.') << std::setw(23) << std::right << "Winner : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.matchWinner << std::endl;
-         os << std::setfill('.') << std::setw(23) << std::right << "Loser : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.matchLoser << std::endl;
+         os << std::setfill('.') << std::setw(23) << std::right << "Tourney ID : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.tournamentID << '\n';
+         os << std::setfill('.') << std::setw(23) << std::right << "Match ID : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.matchID << '\n';
+         os << std::setfill('.') << std::setw(23) << std::right << "Tourney : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.tournamentName << '\n';
+         os << std::setfill('.') << std::setw(23) << std::right << "Winner : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.matchWinner << '\n';
+         os << std::setfill('.') << std::setw(23) << std::right << "Loser : " << std::setw(30) << std::setfill('.') << std::left << tennisMatch.matchLoser << '\n';
          
          os << std::setfill(' ');
       }
