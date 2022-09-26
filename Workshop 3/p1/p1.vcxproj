@@ -127,10 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="w3_p1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="sample_output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="Queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
