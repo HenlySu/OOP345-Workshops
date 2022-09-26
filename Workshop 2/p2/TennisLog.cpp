@@ -22,7 +22,9 @@ namespace sdds {
       numMatches = 0;
    }
    TennisLog::TennisLog(const char* filename) {
+      tennisMatches = nullptr;
       numMatches = 0;
+
       std::string line;
       std::ifstream fp(filename);
 
@@ -45,8 +47,12 @@ namespace sdds {
             fp.ignore();
             std::getline(fp, tempMatch.matchWinner, ',');
             std::getline(fp, tempMatch.matchLoser, '\n');
+
             tennisMatches[i] = tempMatch;
          }
+      }
+      else {
+         std::cout << "Unable to read the file" << std::endl;
       }
       fp.close();
    }
@@ -57,8 +63,8 @@ namespace sdds {
    }
    TennisLog& TennisLog::operator = (const TennisLog& obj) {
       if (this != &obj) {
-         numMatches = obj.numMatches;
          delete[] tennisMatches;
+         numMatches = obj.numMatches;
          tennisMatches = new TennisMatch[numMatches];
 
          for (size_t i = 0; i < numMatches; i++) {
@@ -78,34 +84,30 @@ namespace sdds {
    }
    TennisLog& TennisLog::operator = (TennisLog&& obj) noexcept {
       if (this != &obj) {
-         delete[] tennisMatches;
-         tennisMatches = obj.tennisMatches;
-         obj.tennisMatches = nullptr;
-
          numMatches = obj.numMatches;
+
+         delete[] tennisMatches;         
+         tennisMatches = obj.tennisMatches;
+
+         obj.tennisMatches = nullptr;
          obj.numMatches = 0;
       }
       return *this;
    }
 
    void TennisLog::addMatch(TennisMatch& tennisMatch) {
-      numMatches++;
-      TennisMatch* temp = new TennisMatch[numMatches];
-      
-      if (tennisMatches != nullptr) {
-         for (size_t i = 0; i < (numMatches - 1); i++) {
-            temp[i] = tennisMatches[i];
-         }
-         temp[numMatches - 1] = tennisMatch;
-      }
-      else {
-         temp[0] = tennisMatch;
+
+      TennisMatch* temp = new TennisMatch[numMatches + 1];
+
+      for (size_t i = 0; i < numMatches; i++) {
+         temp[i] = tennisMatches[i];
       }
 
+      temp[numMatches] = tennisMatch;
       delete[] tennisMatches;
       tennisMatches = nullptr;
-
-      tennisMatches = temp;
+      tennisMatches = std::move(temp);
+      numMatches++;
    }
    TennisLog TennisLog::findMatches(const char* playername) {
       TennisLog temp{};

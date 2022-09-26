@@ -20,8 +20,8 @@ namespace sdds {
    };
 
    class TennisLog {
-      TennisMatch* tennisMatches;
-      size_t numMatches;
+      TennisMatch* tennisMatches{};
+      size_t numMatches{};
    public:
       //Constructors
       TennisLog();
