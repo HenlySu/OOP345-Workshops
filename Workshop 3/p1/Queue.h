@@ -10,17 +10,51 @@ provided to complete the workshops and assignments.
 #ifndef SDDS_QUEUE_H
 
 namespace sdds {
-  
-   template <class T, int CAPACITY>
+
+   template <typename T, unsigned int CAPACITY>
    class Queue {
-      T type;
-      
+      T client[CAPACITY];
+      int numOfObj;
    public:
-      bool push(const T& item);
-      Queue pop();
-      int size();
-      std::ostream& display(std::ostream& os = std::cout);
-      Queve operator [] (int index);
+
+      //Constructor
+      template <typename T, unsigned int CAPACITY>
+      Queue<T, CAPACITY>::Queue() : numOfObj = 0;
+
+      template <typename T, unsigned int CAPACITY>
+      bool Queue<T, CAPACITY>::push(const T& item) {
+         if (numOfObj < CAPACITY) {
+            client[numOfObj] = item;
+            numOfObj++;
+         }
+         return (numOfObj < CAPACITY) ? true : false;
+      }
+
+      template <typename T, unsigned int CAPACITY>
+      T Queue<T, CAPACITY>::pop() {
+         T temp{};
+         temp = client[0];
+
+         for (int i = 0; i < numOfObj - 1; i++) {
+            client[i] = client[i + 1];
+         }
+         return temp;
+      }
+
+      template <typename T, unsigned int CAPACITY>
+      int size() {
+
+      }
+
+      template <typename T, unsigned int CAPACITY>
+      std::ostream& display(std::ostream& os = std::cout) {
+
+      }
+
+      template <typename T, unsigned int CAPACITY>
+      operator [] (int index) {
+
+      }
    };
 }
 #endif // !SDDS_QUEUE_H

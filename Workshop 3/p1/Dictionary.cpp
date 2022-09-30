@@ -11,5 +11,5 @@ provided to complete the workshops and assignments.
 #include "Dictionary.h"
 
 namespace sdds {
-
+   
 }
