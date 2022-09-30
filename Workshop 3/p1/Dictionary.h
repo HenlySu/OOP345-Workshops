@@ -8,6 +8,8 @@ provided to complete the workshops and assignments.
 
 #pragma once
 #ifndef SDDS_DICTIONARY_H
+#define SDDS_DICTIONARY_H
+
 #include <iostream>
 
 namespace sdds {
@@ -19,7 +21,15 @@ namespace sdds {
       const std::string& getDefinition() const { return m_definition; }
       Dictionary(const std::string& term, const std::string& definition) : m_term{ term }, m_definition{ definition }{}
 
+      //Constructor
       Dictionary();
+
+      //Rule of three
+      Dictionary(const Dictionary& obj);
+      Dictionary& operator = (const Dictionary& obj);
+      ~Dictionary();
+
+      friend std::ostream& operator << (std::ostream& os, const Dictionary obj);
    };
 }
 #endif // !SDDS_DICTIONARY_H
