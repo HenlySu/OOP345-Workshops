@@ -2,7 +2,36 @@
 Name:			Henly Su
 Student ID:	143334183
 Email:		hsu31@myseneca.ca
+
 I have done all the coding by myself and only copied the code that my professor
 provided to complete the workshops and assignments.
 */
+
+In the Dictionary module it was necessary to add the following functions:
+   
+   - Dictionary() - The default constructor
+
+      - The default constructor was needed to create an object safe empty object
+      
+   - The Rule of Three
+      - Dictionary(const Dictionary& obj) - Copy constructor
+      - Dictionary& operator = (const Dictionary& obj) - Copy assignment operator
+      - ~Dictionary() - The destructor
+
+         - The rule of three was needed in order to copy one object to another in 
+         the program properly.
+
+   - friend std::ostream& operator << (std::ostream& os, const Dictionary obj);
+
+      - The extaction operator was also implemented to display the information inside
+      the dictionary object.
+
+   
+
+The reason for specializing the push member function in the derived class is to ensure
+that the numbers are identical or almost identical with the difference between them being
+0.005 or less.
+
+The reason for defining the class variable emptyObj outside the class definition is 
+because static members are only allowed to be declared and not define.
 

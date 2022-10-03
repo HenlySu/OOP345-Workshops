@@ -8,18 +8,16 @@ namespace sdds {
    template <typename T>
    class UniqueQueue : public sdds::Queue<T, 100u> {
    public:
-      bool push(const T& item) {
+      bool push(const T& item) override{
          
       }
    };
 
    //Specialization
    template <>
-   class UniqueQueue<double> : public sdds::Queue<double, 100u>{
-   public:
-      bool push(double num) {
-         
-      }
-   };
+   bool UniqueQueue<double>::push(const double& num) {
+      
+   }
+
 }
 #endif // !SDDS_UNIQUEQUEUE_H

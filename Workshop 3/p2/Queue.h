@@ -18,19 +18,28 @@ namespace sdds {
    class Queue {
       T obj[CAPACITY]{};
       unsigned int numOfObj{};
+      static T emptyObj;
    public:
       //Constructor
       Queue();
 
       virtual bool push(const T& item);
       T pop();
-      int size();
+      int size() const;
       std::ostream& display(std::ostream& os = std::cout);
       T operator [] (unsigned int index);
 
       //Destructor
       virtual ~Queue();
    };
+
+   //Initializing Static Variable
+   template <typename T, unsigned int CAPACITY>
+   T Queue<T, CAPACITY>::emptyObj = T{};
+
+   //Specialization
+   template <> 
+   inline Dictionary Queue<Dictionary, 100u>::emptyObj = Dictionary{ "Empty substitute", "Empty Term" };
 
    //Constructor
    template <typename T, unsigned int CAPACITY>
@@ -49,18 +58,19 @@ namespace sdds {
 
    template <typename T, unsigned int CAPACITY>
    T Queue<T, CAPACITY>::pop() {
-      T temp{};
-      temp = obj[0];
+      T temp = obj[0];
 
       for (unsigned int i = 0; i < numOfObj - 1; i++) {
          obj[i] = obj[i + 1];
       }
+
       numOfObj--;
+
       return temp;
    }
 
    template <typename T, unsigned int CAPACITY>
-   int Queue<T, CAPACITY>::size() {
+   int Queue<T, CAPACITY>::size() const {
       return numOfObj;
    }
 

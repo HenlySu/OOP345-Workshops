@@ -17,7 +17,7 @@ namespace sdds {
    Dictionary::Dictionary() { }
 
    //Rule of three
-   Dictionary::Dictionary(const Dictionary& obj) {
+   /*Dictionary::Dictionary(const Dictionary& obj) {
       *this = obj;
    }
    Dictionary& Dictionary::operator = (const Dictionary& obj) {
@@ -27,10 +27,14 @@ namespace sdds {
       }
       return *this;
    }
-   Dictionary::~Dictionary() { }
+   Dictionary::~Dictionary() { }*/
 
    std::ostream& operator << (std::ostream& os, const Dictionary obj) {
       os << std::setw(20) << obj.getTerm() << ": " << obj.getDefinition();
       return os;
+   }
+
+   bool operator == (const Dictionary& LO, const Dictionary& RO) {
+      return LO.getTerm() == RO.getTerm();
    }
 }
