@@ -24,11 +24,6 @@ namespace sdds {
       //Constructor
       Dictionary();
 
-      //Rule of three
-      /*Dictionary(const Dictionary& obj);
-      Dictionary& operator = (const Dictionary& obj);
-      ~Dictionary();*/
-
       friend std::ostream& operator << (std::ostream& os, const Dictionary obj);
       friend bool operator == (const Dictionary& LO, const Dictionary& RO);
    };

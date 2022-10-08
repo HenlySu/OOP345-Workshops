@@ -38,8 +38,8 @@ namespace sdds {
    T Queue<T, CAPACITY>::emptyObj = T{};
 
    //Specialization
-   template <> 
-   inline Dictionary Queue<Dictionary, 100u>::emptyObj = Dictionary{ "Empty substitute", "Empty Term" };
+   template <>
+   inline Dictionary Queue<Dictionary, 100u>::emptyObj = Dictionary{ "Empty Term", "Empty Substitute" };
 
    //Constructor
    template <typename T, unsigned int CAPACITY>
@@ -90,11 +90,8 @@ namespace sdds {
 
    template <typename T, unsigned int CAPACITY>
    T Queue<T, CAPACITY>::operator [] (unsigned int index) {
-      T temp{};
-      if (index < numOfObj) {
-         temp = obj[index];
-      }
-      return temp;
+      
+      return (index < numOfObj) ? obj[index] : emptyObj;
    }
 
    template <typename T, unsigned int CAPACITY>
