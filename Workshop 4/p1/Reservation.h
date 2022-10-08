@@ -26,7 +26,7 @@ namespace sdds {
       Reservation(const std::string& res);
       void update(int day, int time);
 
-      friend std::ostream operator << (std::ostream os, const Reservation& obj);
+      friend std::ostream& operator << (std::ostream& os, const Reservation& obj);
    };
 }
 #endif // !SDDS_RESERVATION_H
