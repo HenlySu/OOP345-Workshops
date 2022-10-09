@@ -12,12 +12,12 @@ provided to complete the workshops and assignments.
 #include "ConfirmationSender.h"
 
 namespace sdds {
-   ConfirmationSender& ConfirmationSender::operator+=(const Reservation& res){
-      // // O: insert return statement here
+   ConfirmationSender& ConfirmationSender::operator += (const Reservation& res){
+      
    }
 
-   ConfirmationSender& ConfirmationSender::operator-=(const Reservation& res){
-      // // O: insert return statement here
+   ConfirmationSender& ConfirmationSender::operator -= (const Reservation& res){
+      
    }
 
    std::ostream& operator<<(std::ostream& os, const ConfirmationSender& confirmationSender){

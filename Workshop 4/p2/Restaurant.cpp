@@ -14,16 +14,78 @@ provided to complete the workshops and assignments.
 
 namespace sdds {
    Restaurant::Restaurant(const Reservation* reservations[], size_t cnt){
-
+      resCnt = cnt;
+      *reservation = new Reservation[resCnt];
+       
+      for (size_t i = 0u; i < resCnt; i++) {
+         *reservation[i] = *reservations[i];
+      }
    }
 
-   size_t Restaurant::size(){
-
-      
+   size_t Restaurant::size() const{
+      return resCnt;
    }
+
+   //Rule of three
+   Restaurant::Restaurant(const Restaurant& obj){
+      *this = obj;
+   }
+
+   Restaurant& Restaurant::operator = (const Restaurant& obj){
+      if (this != &obj) {
+         delete[] reservation;
+         
+         resCnt = obj.resCnt;
+         *reservation = new Reservation[resCnt];
+
+         for (size_t i = 0u; i < resCnt; i++) {
+            reservation[i] = obj.reservation[i];
+         }
+      }
+      return *this;
+   }
+
+   Restaurant::~Restaurant(){
+      delete[] reservation;
+      reservation = nullptr;
+   }
+
+   //Rule of five
+   Restaurant::Restaurant(Restaurant&& obj) noexcept {
+      *this = std::move(obj);
+   }
+
+   Restaurant& Restaurant::operator = (Restaurant&& obj) noexcept {
+      if (this != &obj) {
+         delete[] reservation;
+         resCnt = obj.resCnt;
+
+         reservation = obj.reservation;
+
+         obj.reservation = nullptr;
+         obj.resCnt = 0u;
+      }
+      return *this;
+   }
+
 
    std::ostream& operator << (std::ostream& os, const Restaurant& res) {
+      static size_t counter = 0u;
 
+      os << "--------------------------"
+         << "Fancy Restaurant " << counter++
+         << "--------------------------" << std::endl;
+
+      if (res.resCnt == 0){
+         os << "This restaurant is empty!" << std::endl;
+      }
+      else {
+         for (size_t i = 0; i < res.resCnt; i++) {
+            os << res.reservation[i];
+         }
+      }
+
+      os << "--------------------------" << std::endl;
+      return os;
    }
-
 }

@@ -29,8 +29,6 @@ namespace sdds {
 
       tempString = std::regex_replace(tempString, removingWhiteSpaces, "");
 
-
-
       int starting = 0;
       char semiColon = ':';
       char comma = ',';
