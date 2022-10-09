@@ -15,8 +15,21 @@ provided to complete the workshops and assignments.
 
 namespace sdds {
    class ConfirmationSender {
-      const Reservation** reservation;
+      const Reservation** reservation{};
+      size_t resCnt{};
    public:
+      //Constructor
+      ConfirmationSender();
+
+      //Rule of three
+      ConfirmationSender(const ConfirmationSender& obj);
+      ConfirmationSender& operator = (const ConfirmationSender& obj);
+      ~ConfirmationSender();
+
+      //Rule of five
+      ConfirmationSender(ConfirmationSender&& obj) noexcept;
+      ConfirmationSender& operator = (ConfirmationSender&& obj) noexcept;
+
       ConfirmationSender& operator += (const Reservation& res);
       ConfirmationSender& operator -= (const Reservation& res);
 

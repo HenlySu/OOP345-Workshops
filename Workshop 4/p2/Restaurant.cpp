@@ -72,12 +72,12 @@ namespace sdds {
    std::ostream& operator << (std::ostream& os, const Restaurant& res) {
       static size_t counter = 0u;
 
-      os << "--------------------------"
+      os << "--------------------------\n"
          << "Fancy Restaurant " << counter++
-         << "--------------------------" << std::endl;
+         << "\n--------------------------\n";
 
       if (res.resCnt == 0){
-         os << "This restaurant is empty!" << std::endl;
+         os << "This restaurant is empty!\n";
       }
       else {
          for (size_t i = 0; i < res.resCnt; i++) {
@@ -85,7 +85,7 @@ namespace sdds {
          }
       }
 
-      os << "--------------------------" << std::endl;
+      os << "--------------------------\n";
       return os;
    }
 }

@@ -7,3 +7,17 @@ I have done all the coding by myself and only copied the code that my professor
 provided to complete the workshops and assignments.
 */
 
+What is the difference between the implementation of a composition and a aggregation
+you may ask? To answer this question we must first understand what a composition and 
+a aggregation is. To put it in simple terms, a aggregation means that one object is
+the owner of another object and a composition means that one object is contained in 
+another object. Hence the word "Composing".
+
+The difference in implementation between the two is that compositions implements
+complete ownership, it is responsible for destroying it's components. A composition
+is also incomplete without its own components. An aggregation on the other hand does
+not manage the creation or destruction of the object that it uses. The creation and
+destruction lies outside of the affregatee type. It is complete even without the 
+existance of an object unlike composition.
+
+//Incomplete
