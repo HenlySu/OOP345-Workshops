@@ -15,10 +15,10 @@ provided to complete the workshops and assignments.
 namespace sdds {
    Restaurant::Restaurant(const Reservation* reservations[], size_t cnt){
       resCnt = cnt;
-      *reservation = new Reservation[resCnt];
+      reservation = new Reservation*[resCnt];
        
-      for (size_t i = 0u; i < resCnt; i++) {
-         *reservation[i] = *reservations[i];
+      for (size_t i = 0; i < resCnt; i++) {
+         reservation[i] = *reservations[i];
       }
    }
 

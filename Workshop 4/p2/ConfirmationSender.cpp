@@ -13,10 +13,10 @@ provided to complete the workshops and assignments.
 
 namespace sdds {
    //Constructor
-   /*ConfirmationSender::ConfirmationSender() {
+   ConfirmationSender::ConfirmationSender() {
       reservation = nullptr;
       resCnt = 0u;
-   }*/
+   }
 
    //Rule of three
    ConfirmationSender::ConfirmationSender(const ConfirmationSender& obj) {
@@ -27,7 +27,7 @@ namespace sdds {
          delete[] reservation;
          resCnt = obj.resCnt;
 
-         *reservation = new Reservation[resCnt];
+         reservation = new Reservation*[resCnt];
 
          for (size_t i = 0; i < resCnt; i++) {
             reservation[i] = obj.reservation[i];
@@ -58,11 +58,53 @@ namespace sdds {
 
 
    ConfirmationSender& ConfirmationSender::operator += (const Reservation& res){
-      
+      if (!inArray(res)) {
+         const Reservation** temp;
+         temp = new const Reservation*[resCnt++];
+
+         for (size_t i = 0; i < resCnt; i++) {
+            temp[i] = reservation[i];
+         }
+
+         temp[resCnt] = &res;
+
+         delete[] reservation;
+         reservation = nullptr;
+         
+         reservation = temp;
+      }
+      return *this;
    }
 
    ConfirmationSender& ConfirmationSender::operator -= (const Reservation& res){
       
+      size_t index = 0;
+
+      if (inArray(res, index)) {
+         for (size_t i = 0; i < resCnt; i++) {
+            if (reservation[i] == &res) {
+               reservation[i] = nullptr;
+            }
+         }
+
+         //Challenge to resize the array
+         const Reservation** temp;
+         temp = new const Reservation *[resCnt - 1];
+
+         for (size_t i = 0; i < index - 1; i++) {
+            temp[i] = reservation[i];
+         }
+
+         for (size_t i = index + 1; i < resCnt; i++) {
+            temp[i] = reservation[i];
+         }
+
+         delete[] reservation;
+         reservation = nullptr;
+
+         reservation = temp;
+      }
+      return *this;
    }
 
    std::ostream& operator << (std::ostream& os, const ConfirmationSender& confirmationSender){
@@ -79,7 +121,29 @@ namespace sdds {
             os << confirmationSender.reservation[i];
          }
       }
-
       return os;
+   }
+
+   bool ConfirmationSender::inArray(const Reservation& obj) {
+      bool inTheArray = false;
+
+      for (int i = 0; i < resCnt && !inTheArray; i++) {
+         if (reservation[i] == &obj) {
+            inTheArray = true;
+         }
+      }
+      return inTheArray;
+   }
+
+   bool ConfirmationSender::inArray(const Reservation& obj, size_t& index) {
+      bool inTheArray = false;
+
+      for (int i = 0; i < resCnt && !inTheArray; i++) {
+         if (reservation[i] == &obj) {
+            inTheArray = true;
+            index = i;
+         }
+      }
+      return inTheArray;
    }
 }

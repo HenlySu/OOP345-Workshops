@@ -17,6 +17,10 @@ namespace sdds {
    class ConfirmationSender {
       const Reservation** reservation{};
       size_t resCnt{};
+
+      bool inArray(const Reservation& obj);
+      bool inArray(const Reservation& obj, size_t& returnIndex);
+
    public:
       //Constructor
       ConfirmationSender();
