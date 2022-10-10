@@ -25,14 +25,17 @@ namespace sdds {
    ConfirmationSender& ConfirmationSender::operator = (const ConfirmationSender& obj) {
       if (this != &obj) {
          delete[] reservation;
+         reservation = nullptr;
+
          resCnt = obj.resCnt;
 
-         reservation = new Reservation*[resCnt];
+         reservation = new const Reservation*[resCnt];
 
          for (size_t i = 0; i < resCnt; i++) {
             reservation[i] = obj.reservation[i];
          }
       }
+      return *this;
    }
    ConfirmationSender::~ConfirmationSender() {
       delete[] reservation;

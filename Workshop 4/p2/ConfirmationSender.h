@@ -40,4 +40,4 @@ namespace sdds {
       friend std::ostream& operator << (std::ostream& os, const ConfirmationSender& confirmationSender);
    };
 }
-#endif // !1
+#endif // !_CONFIRMATIONSENDER_H_

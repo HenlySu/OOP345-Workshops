@@ -18,7 +18,7 @@ namespace sdds {
       reservation = new Reservation*[resCnt];
        
       for (size_t i = 0; i < resCnt; i++) {
-         reservation[i] = *reservations[i];
+         reservation[i] = new Reservation(*reservations[i]);
       }
    }
 
