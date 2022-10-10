@@ -36,7 +36,7 @@ namespace sdds {
          delete[] reservation;
          
          resCnt = obj.resCnt;
-         *reservation = new Reservation[resCnt];
+         reservation = new Reservation*[resCnt];
 
          for (size_t i = 0u; i < resCnt; i++) {
             reservation[i] = obj.reservation[i];
@@ -73,7 +73,7 @@ namespace sdds {
       static size_t counter = 0u;
 
       os << "--------------------------\n"
-         << "Fancy Restaurant " << counter++
+         << "Fancy Restaurant " << ++counter
          << "\n--------------------------\n";
 
       if (res.resCnt == 0){
@@ -81,7 +81,7 @@ namespace sdds {
       }
       else {
          for (size_t i = 0; i < res.resCnt; i++) {
-            os << res.reservation[i];
+            os << *res.reservation[i];
          }
       }
 

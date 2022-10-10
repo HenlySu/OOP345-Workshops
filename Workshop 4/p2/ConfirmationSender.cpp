@@ -65,7 +65,7 @@ namespace sdds {
          const Reservation** temp;
          temp = new const Reservation*[resCnt++];
 
-         for (size_t i = 0; i < resCnt; i++) {
+         for (size_t i = 0; i < resCnt - 1; i++) {
             temp[i] = reservation[i];
          }
 
@@ -121,7 +121,7 @@ namespace sdds {
       }
       else {
          for (size_t i = 0; i < confirmationSender.resCnt; i++) {
-            os << confirmationSender.reservation[i];
+            os << *confirmationSender.reservation[i];
          }
       }
       return os;
