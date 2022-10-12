@@ -90,8 +90,8 @@ int main(int argc, char** argv)
 	std::cout << "The library content\n";
 	std::cout << "-----------------------------------------\n";
 	// TODO: iterate over the library and print each book to the screen
-	for (size_t i = 0; i < 7; i++) {
-		std::cout << library[i];
+	for (auto& book : library) {
+		std::cout << book;
 	}
 
 
@@ -99,8 +99,8 @@ int main(int argc, char** argv)
 
 	// TODO: iterate over the library and update the price of each book
 	//         using the lambda defined above.
-	for (size_t i = 0; i < 7; i++) {
-		priceUpdate(library[i]);
+	for (auto& book : library) {
+		priceUpdate(book);
 	}
 
 
@@ -108,8 +108,8 @@ int main(int argc, char** argv)
 	std::cout << "The library content (updated prices)\n";
 	std::cout << "-----------------------------------------\n";
 	// TODO: iterate over the library and print each book to the screen
-	for (size_t i = 0; i < 7; i++) {
-		std::cout << library[i];
+	for (auto& book : library) {
+		std::cout << book;
 	}
 
 
