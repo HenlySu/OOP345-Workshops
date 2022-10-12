@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <string>
 #include "Book.h"
 #include "Book.h"
 
@@ -35,6 +36,26 @@ int main(int argc, char** argv)
 		//       - lines that start with "#" are considered comments and should be ignored
 		//       - if the file cannot be open, print a message to standard error console and
 		//                exit from application with error code "AppErrors::CannotOpenFile"
+
+		std::ifstream file(argv[1]);
+		std::string line{};
+		size_t libraryIndex = 0;
+
+		if (file) {
+			do {
+				std::getline(file, line);
+
+				if (file) {
+					if (line[0] != '#') {
+						library[libraryIndex] = Book(line);
+						++libraryIndex;
+					}
+				}
+			} while (file);
+		}
+		else{
+			exit(AppErrors::CannotOpenFile);
+		}
 	}
 	else
 	{
@@ -52,13 +73,29 @@ int main(int argc, char** argv)
 	//       - if the book was published in UK between 1990 and 1999 (inclussive),
 	//            multiply the price with "gbpToCadRate" and save the new price in the book object
 
+	auto priceUpdate = [&](Book obj) {
+		if (obj.country() == "US") {
+			obj.price() * usdToCadRate;
+		}
+		if (obj.country() == "UK") {
+			if (obj.year() >= 1990 && obj.year() <= 1999) {
+				obj.price() * gbpToCadRate;
+			}
+		}
+	};
+
+	for (size_t i = 0; i < 7; i++) {
+		priceUpdate(library[i]);
+	}
 
 
 	std::cout << "-----------------------------------------\n";
 	std::cout << "The library content\n";
 	std::cout << "-----------------------------------------\n";
 	// TODO: iterate over the library and print each book to the screen
-
+	for (size_t i = 0; i < 7; i++) {
+		std::cout << library[i];
+	}
 
 
 	std::cout << "-----------------------------------------\n\n";
@@ -72,7 +109,9 @@ int main(int argc, char** argv)
 	std::cout << "The library content (updated prices)\n";
 	std::cout << "-----------------------------------------\n";
 	// TODO: iterate over the library and print each book to the screen
-
+	for (size_t i = 0; i < 7; i++) {
+		std::cout << library[i];
+	}
 
 
 	std::cout << "-----------------------------------------\n";

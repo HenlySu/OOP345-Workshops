@@ -3,6 +3,7 @@
 #define _BOOK_H_
 
 #include <iostream>
+#include <regex>
 
 namespace sdds {
    class Book {
@@ -13,15 +14,17 @@ namespace sdds {
       double bookPrice{};
       std::string bookDescription{};
    public:
-      Book();
+      Book() = default;
       Book(const std::string& strBook);
 
       const std::string& title() const;
       const std::string& country() const;
       const size_t& year() const;
-      double& price();
+      auto price() -> double&;
       
-      friend std::ostream& operator << (std::ostream& os, Book& obj);
+      friend auto operator << (std::ostream& os, Book& obj) ->std::ostream&;
+
+      auto trim(std::string& str) -> void;
    };
 }
 #endif // !_BOOK_H_
