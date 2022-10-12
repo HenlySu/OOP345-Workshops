@@ -19,45 +19,34 @@ namespace sdds {
    Book::Book(const std::string& strBook) {
       std::string tempString = strBook;
 
-
       size_t startingPosition = 0;
       char comma = ',';
       char period = '.'; //For end of the sentence
 
-      //AUTHOR,   TITLE,   COUNTRY, PRICE,   YEAR, DESCRIPTION
-
       trim(tempString);
       
-
       //For book author
       size_t found = tempString.find(comma);
       bookAuthor = tempString.substr(startingPosition, found);
       tempString.erase(startingPosition, found + 1);
-
-      trim(bookAuthor);
-      
+      trim(bookAuthor);      
 
       //For book title
       found = tempString.find(comma);
       bookTitle = tempString.substr(startingPosition, found);
       tempString.erase(startingPosition, found + 1);
-
       trim(bookTitle);
       
-
       //For book countr
       found = tempString.find(comma);
       bookCountry = tempString.substr(startingPosition, found);
       tempString.erase(startingPosition, found + 1);
-
       trim(bookCountry);
       
-
       //For book price
       found = tempString.find(comma);
       bookPrice = stod(tempString.substr(startingPosition, found));
-      tempString.erase(startingPosition, found + 1);
-      
+      tempString.erase(startingPosition, found + 1);      
 
       //For book year
       found = tempString.find(comma);
@@ -68,7 +57,6 @@ namespace sdds {
       found = tempString.find(period);
       bookDescription = tempString.substr(startingPosition, found + 1);
       tempString.erase(startingPosition, found + 1);
-
       trim(bookDescription);
    }
 

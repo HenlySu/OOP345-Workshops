@@ -73,8 +73,6 @@ int main(int argc, char** argv)
 	//       - if the book was published in UK between 1990 and 1999 (inclussive),
 	//            multiply the price with "gbpToCadRate" and save the new price in the book object
 	
-	//Needs fixing
-	//Price isn't updating
 	auto priceUpdate = [&](Book& obj) {
 		if (obj.country() == "US") {
 			obj.price() *= usdToCadRate;
