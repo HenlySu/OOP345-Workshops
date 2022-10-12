@@ -95,7 +95,7 @@ namespace sdds {
       os << std::setw(4) << obj.bookYear << " | ";
 
       //the price printed on a field of size 6, with 2 decimal digits;
-      os << std::setw(6) << std::right << obj.bookPrice << " | ";
+      os << std::setw(6) << std::right << std::setprecision(2) << std::fixed << obj.bookPrice << " | ";
       os << obj.bookDescription << '\n';
 
       return os;
