@@ -19,7 +19,7 @@ namespace sdds {
       size_t resCnt{};
 
       bool inArray(const Reservation& obj);
-      bool inArray(const Reservation& obj, size_t& returnIndex);
+      bool inArray(const Reservation& obj, size_t& returnIndex); //Returns the index at which it was found
 
    public:
       //Constructor

@@ -63,7 +63,7 @@ namespace sdds {
    ConfirmationSender& ConfirmationSender::operator += (const Reservation& res){
       if (!inArray(res)) {
          const Reservation** temp;
-         temp = new const Reservation*[resCnt++];
+         temp = new const Reservation * [resCnt];
 
          for (size_t i = 0; i < resCnt - 1; i++) {
             temp[i] = reservation[i];
@@ -73,7 +73,8 @@ namespace sdds {
 
          delete[] reservation;
          reservation = nullptr;
-         
+
+         ++resCnt;
          reservation = temp;
       }
       return *this;
@@ -84,14 +85,10 @@ namespace sdds {
       size_t index = 0;
 
       if (inArray(res, index)) {
-         for (size_t i = 0; i < resCnt; i++) {
-            if (reservation[i] == &res) {
-               reservation[i] = nullptr;
-            }
-         }
+         reservation[index] = nullptr;
 
          //Challenge to resize the array
-         const Reservation** temp;
+         /*const Reservation** temp;
          temp = new const Reservation *[resCnt - 1];
 
          for (size_t i = 0; i < index - 1; i++) {
@@ -105,7 +102,7 @@ namespace sdds {
          delete[] reservation;
          reservation = nullptr;
 
-         reservation = temp;
+         reservation = temp;*/
       }
       return *this;
    }
