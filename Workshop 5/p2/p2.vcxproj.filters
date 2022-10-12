@@ -21,9 +21,6 @@
     <ClCompile Include="Book.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Movie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,6 +39,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="words.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="sample-output.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

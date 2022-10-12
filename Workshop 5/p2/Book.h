@@ -32,8 +32,12 @@ namespace sdds {
       auto price() -> double&;
 
       friend auto operator << (std::ostream& os, Book& obj)->std::ostream&;
-
       auto trim(std::string& str) -> void;
+   
+      template <typename T>
+         void fixSpelling(T& SpellChecker) {
+
+         }
    };
 }
 #endif // !_BOOK_H_
