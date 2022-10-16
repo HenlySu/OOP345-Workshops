@@ -12,11 +12,6 @@ provided to complete the workshops and assignments.
 #include "ConfirmationSender.h"
 
 namespace sdds {
-   //Constructor
-   ConfirmationSender::ConfirmationSender() {
-      reservation = nullptr;
-      resCnt = 0u;
-   }
 
    //Rule of three
    ConfirmationSender::ConfirmationSender(const ConfirmationSender& obj) {
@@ -29,7 +24,7 @@ namespace sdds {
 
          resCnt = obj.resCnt;
 
-         reservation = new const Reservation*[resCnt];
+         reservation = new const Reservation * [resCnt];
 
          for (size_t i = 0; i < resCnt; i++) {
             reservation[i] = obj.reservation[i];
@@ -59,13 +54,11 @@ namespace sdds {
       return *this;
    }
 
-
-   ConfirmationSender& ConfirmationSender::operator += (const Reservation& res){
+   ConfirmationSender& ConfirmationSender::operator += (const Reservation& res) {
       if (!inArray(res)) {
-         const Reservation** temp;
-         temp = new const Reservation * [resCnt];
+         const Reservation** temp = new const Reservation * [resCnt + 1];
 
-         for (size_t i = 0; i < resCnt - 1; i++) {
+         for (size_t i = 0; i < resCnt; i++) {
             temp[i] = reservation[i];
          }
 
@@ -74,60 +67,47 @@ namespace sdds {
          delete[] reservation;
          reservation = nullptr;
 
-         ++resCnt;
-         reservation = temp;
+         reservation = std::move(temp);
+
+         resCnt++;
       }
       return *this;
    }
 
-   ConfirmationSender& ConfirmationSender::operator -= (const Reservation& res){
-      
+   ConfirmationSender& ConfirmationSender::operator -= (const Reservation& res) {
+
       size_t index = 0;
 
       if (inArray(res, index)) {
          reservation[index] = nullptr;
-
-         //Challenge to resize the array
-         /*const Reservation** temp;
-         temp = new const Reservation *[resCnt - 1];
-
-         for (size_t i = 0; i < index - 1; i++) {
-            temp[i] = reservation[i];
-         }
-
-         for (size_t i = index + 1; i < resCnt; i++) {
-            temp[i] = reservation[i];
-         }
-
-         delete[] reservation;
-         reservation = nullptr;
-
-         reservation = temp;*/
       }
       return *this;
    }
 
-   std::ostream& operator << (std::ostream& os, const ConfirmationSender& confirmationSender){
-      
+   std::ostream& operator << (std::ostream& os, const ConfirmationSender& confirmationSender) {
+
       os << "--------------------------\n"
          "Confirmations to Send\n"
          "--------------------------\n";
-      
+
       if (confirmationSender.resCnt == 0) {
-         os << "There are no confirmation to send!\n";
+         os << "There are no confirmations to send!\n";
       }
       else {
-         for (size_t i = 0; i < confirmationSender.resCnt; i++) {
-            os << *confirmationSender.reservation[i];
+         for (size_t i = 0; i < confirmationSender.resCnt; ++i) {
+            if (confirmationSender.reservation[i] != nullptr) {
+               os << *confirmationSender.reservation[i];
+            }
          }
       }
+      os << "--------------------------\n";
       return os;
    }
 
    bool ConfirmationSender::inArray(const Reservation& obj) {
       bool inTheArray = false;
 
-      for (int i = 0; i < resCnt && !inTheArray; i++) {
+      for (size_t i = 0; i < resCnt && !inTheArray; i++) {
          if (reservation[i] == &obj) {
             inTheArray = true;
          }
@@ -138,7 +118,7 @@ namespace sdds {
    bool ConfirmationSender::inArray(const Reservation& obj, size_t& index) {
       bool inTheArray = false;
 
-      for (int i = 0; i < resCnt && !inTheArray; i++) {
+      for (size_t i = 0; i < resCnt && !inTheArray; i++) {
          if (reservation[i] == &obj) {
             inTheArray = true;
             index = i;

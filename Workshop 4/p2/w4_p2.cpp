@@ -1,5 +1,3 @@
-// Workshop 4 - Containers
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>

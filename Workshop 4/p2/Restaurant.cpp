@@ -14,11 +14,13 @@ provided to complete the workshops and assignments.
 
 namespace sdds {
    Restaurant::Restaurant(const Reservation* reservations[], size_t cnt){
-      resCnt = cnt;
-      reservation = new Reservation*[resCnt];
-       
-      for (size_t i = 0; i < resCnt; i++) {
-         reservation[i] = new Reservation(*reservations[i]);
+      if (reservations) {
+         resCnt = cnt;
+         reservation = new Reservation * [resCnt];
+
+         for (size_t i = 0; i < resCnt; i++) {
+            reservation[i] = new Reservation(*reservations[i]);
+         }
       }
    }
 
@@ -34,9 +36,10 @@ namespace sdds {
    Restaurant& Restaurant::operator = (const Restaurant& obj){
       if (this != &obj) {
          delete[] reservation;
+         reservation = nullptr;
          
          resCnt = obj.resCnt;
-         reservation = new Reservation*[resCnt];
+         reservation = new Reservation * [resCnt];
 
          for (size_t i = 0u; i < resCnt; i++) {
             reservation[i] = obj.reservation[i];
@@ -46,8 +49,11 @@ namespace sdds {
    }
 
    Restaurant::~Restaurant(){
+      /*for (size_t i = 0; i < resCnt; i++) {         //Program crashes
+         delete reservation[i];
+      }*/
+
       delete[] reservation;
-      reservation = nullptr;
    }
 
    //Rule of five
@@ -58,29 +64,29 @@ namespace sdds {
    Restaurant& Restaurant::operator = (Restaurant&& obj) noexcept {
       if (this != &obj) {
          delete[] reservation;
-         resCnt = obj.resCnt;
-
+         reservation = nullptr;
+         
          reservation = obj.reservation;
-
+         resCnt = obj.resCnt;
+         
          obj.reservation = nullptr;
          obj.resCnt = 0u;
       }
       return *this;
    }
 
-
    std::ostream& operator << (std::ostream& os, const Restaurant& res) {
       static size_t counter = 0u;
 
       os << "--------------------------\n"
-         << "Fancy Restaurant " << ++counter
-         << "\n--------------------------\n";
+         << "Fancy Restaurant (" << ++counter
+         << ")\n--------------------------\n";
 
       if (res.resCnt == 0){
          os << "This restaurant is empty!\n";
       }
       else {
-         for (size_t i = 0; i < res.resCnt; i++) {
+         for (size_t i = 0; i < res.resCnt; ++i) {
             os << *res.reservation[i];
          }
       }

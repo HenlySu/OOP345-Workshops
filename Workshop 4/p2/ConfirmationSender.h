@@ -23,7 +23,7 @@ namespace sdds {
 
    public:
       //Constructor
-      ConfirmationSender();
+      ConfirmationSender() = default;
 
       //Rule of three
       ConfirmationSender(const ConfirmationSender& obj);

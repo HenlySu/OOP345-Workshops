@@ -22,11 +22,12 @@ namespace sdds {
       int reservationDay{};
       int reservationHour{};
    public:
-      Reservation();
+      Reservation() = default;
       Reservation(const std::string& res);
       void update(int day, int time);
 
       friend std::ostream& operator << (std::ostream& os, const Reservation& obj);
+      void trim(std::string& str);
    };
 }
 #endif // !SDDS_RESERVATION_H
