@@ -25,6 +25,8 @@ namespace sdds {
 
       trim(tempString);
 
+      //Need to create function for this LOL too lengthy
+
       //For book author
       size_t found = tempString.find(comma);
       bookAuthor = tempString.substr(startingPosition, found);

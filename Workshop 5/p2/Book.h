@@ -12,6 +12,7 @@ provided to complete the workshops and assignments.
 #define _BOOK_H_
 
 #include <iostream>
+#include "SpellChecker.h"
 #include <regex>
 
 namespace sdds {
@@ -32,11 +33,11 @@ namespace sdds {
       auto price() -> double&;
 
       friend auto operator << (std::ostream& os, Book& obj)->std::ostream&;
-      auto trim(std::string& str) -> void;
+      static auto trim(std::string& str) -> void;
    
       template <typename T>
-         void fixSpelling(T& SpellChecker) {
-
+         void fixSpelling(T& spellChecker) {
+            spellChecker(bookDescription);
          }
    };
 }

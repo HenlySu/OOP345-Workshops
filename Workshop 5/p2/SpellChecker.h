@@ -6,6 +6,7 @@ namespace sdds {
    class SpellChecker {
       std::string m_badWords[6]{};
       std::string m_goodWords[6]{};
+      size_t cnt = 0;
    public:
       SpellChecker(const char* filename);
       void operator () (std::string& text);
