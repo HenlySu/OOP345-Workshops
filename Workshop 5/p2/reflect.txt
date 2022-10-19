@@ -1,0 +1,43 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+The difference between functor and a lambda expression is that a functor is an object that
+implements the () operator overload and lambda is a anonymous function object. The implementaion
+for functors and lambdas are as follows:
+
+   //Functor
+   ----------------------------------------
+   void operator (int a) {
+      //code written here
+   }
+
+   //Lambdas
+   ----------------------------------------
+   auto [](int a) { //Code written here }
+
+
+
+The SpellChecker exception that was written was to prevent a file that's not available
+to crash the program. Two ways of preventing using exceptions are :
+
+   In the constructor - Check to see if the file is available or not using a if statement,
+      if the file exist then process the file, if not then don't do anything;
+   
+   From the client side - We can add a public member function that returns true if the file
+      that was instantiated with the constructor was valid or false other wise. Then we would
+      call this member function in an if statement, and it returns true then we write whatever 
+      code that's necessary with that object.
+
+The classes Movie and Book contains almost the same logic, so that means we can create a static
+function in one of the classes and call it in the other class. Similar to the trim fucntion that
+I wrote in the Book class. That function was called in the spell checker class to remove white 
+spaces from the words.
+
+The default constructor in the Movie and Book class are necessary in the templated collection class
+because we create objects using the dafault constructor. An example can be seen in the += operator
+when we create a new dynamically allocated temp pointer.

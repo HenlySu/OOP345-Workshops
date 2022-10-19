@@ -10,28 +10,22 @@ provided to complete the workshops and assignments.
 #include <iostream>
 #include <fstream>
 #include <string>
+
 #include "SpellChecker.h"
+#include "Book.h"
 
 namespace sdds {
    SpellChecker::SpellChecker(const char* filename) {
 
       std::ifstream file(filename);
-      size_t found{};
 
       if (file) {
          for (size_t i = 0; i < 6; i++) {
+            getline(file, m_badWords[i], ' ');
+            Book::trim(m_badWords[i]);
 
-            //Bad words
-            std::getline(file, m_badWords[i], ' ');
-            found = m_badWords[i].find_first_not_of(' ');
-            m_badWords[i].erase(0, found);
-            m_badWords[i].erase(found + 1);
-
-            //Good words
-            std::getline(file, m_goodWords[i], '\n');
-            found = m_goodWords[i].find_first_not_of(' ');
-            m_goodWords[i].erase(0, found);
-            m_goodWords[i].erase(found);
+            getline(file, m_goodWords[i], '\n');
+            Book::trim(m_goodWords[i]);
          }
       }
       else {
@@ -51,6 +45,7 @@ namespace sdds {
    }
 
    void SpellChecker::showStatistics(std::ostream& os) const {
+      os << "Spellchecker Statistics\n";
       os << "BAD_WORD: " << cnt << " replacements\n";
    }
 }

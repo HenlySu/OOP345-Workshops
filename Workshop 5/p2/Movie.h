@@ -22,7 +22,7 @@ namespace sdds {
          spellChecker(movieDescription);
       }
 
-      friend std::ostream& operator << (std::ostream& os, Movie& movie);
+      friend std::ostream& operator << (std::ostream& os, const Movie& movie);
    };
 }
 #endif // !_MOVIE_H_

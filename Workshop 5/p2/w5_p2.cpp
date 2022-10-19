@@ -74,9 +74,10 @@ int main(int argc, char** argv)
 				if (file) {
 					if (line[0] != '#') {
 						Book book(line);
+						library += book;
 					}
 				}
-			} while (file);
+			} while (library.size() < 4);
 		}
 		else {
 			exit(AppErrors::CannotOpenFile);
@@ -100,6 +101,7 @@ int main(int argc, char** argv)
 			if (file) {
 				if (line[0] != '#') {
 					Book book(line);
+					library += book;
 				}
 			}
 		} while (file);
@@ -164,14 +166,17 @@ int main(int argc, char** argv)
 		std::string line{};
 
 		if (file) {
+			int i = 0;
 			do {
 				std::getline(file, line);
 				if (file) {
 					if (line[0] != '#') {
 						Movie movie(line);
+						movies[i] = movie;
+						i++;
 					}
 				}
-			} while (file);
+			} while (i < 5);
 		}
 	}
 
@@ -203,13 +208,15 @@ int main(int argc, char** argv)
 	//       If an exception occurs print a message in the following format
 	//** EXCEPTION: ERROR_MESSAGE<endl>
 	//         where ERROR_MESSAGE is extracted from the exception object.
-	try {
+
+	try{
 		for (auto i = 0u; i < 10; ++i)
 			std::cout << theCollection[i];
 	}
-	catch(std::exception& e) {
+	catch (const std::exception& e){
 		std::cout << "** EXCEPTION: " << e.what() << std::endl;
 	}
+
 	std::cout << "-----------------------------------------\n\n";
 
 
@@ -218,33 +225,28 @@ int main(int argc, char** argv)
 	std::cout << "-----------------------------------------\n";
 	for (auto i = 3; i < argc; ++i)
 	{
-
-
-
-
-
-
-
-
-
-
-
 		// TODO: The following statement can generate generate an exception
 		//         write code to handle the exception
 		//       If an exception occurs print a message in the following format
 		//** EXCEPTION: ERROR_MESSAGE<endl>
 		//         where ERROR_MESSAGE is extracted from the exception object.
-		SpellChecker sp(argv[i]);
 
-		for (auto j = 0u; j < library.size(); ++j)
-			library[j].fixSpelling(sp);
+		try {
+			SpellChecker sp(argv[i]);
 
-		sp.showStatistics(std::cout);
+			for (auto j = 0u; j < library.size(); ++j)
+				library[j].fixSpelling(sp);
 
-		for (auto j = 0u; j < theCollection.size(); ++j)
-			theCollection[j].fixSpelling(sp);
+			sp.showStatistics(std::cout);
 
-		sp.showStatistics(std::cout);
+			for (auto j = 0u; j < theCollection.size(); ++j)
+				theCollection[j].fixSpelling(sp);
+
+			sp.showStatistics(std::cout);
+		}
+		catch (const char* e) {
+			std::cout << "** EXCEPTION: " << e << std::endl;
+		}
 	}
 	if (argc < 3) {
 		std::cout << "** Spellchecker is empty\n";

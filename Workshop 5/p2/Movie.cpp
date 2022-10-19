@@ -44,9 +44,11 @@ namespace sdds {
       return movieTitle;
    }
 
-   std::ostream& operator << (std::ostream& os, Movie& movie) {
+   std::ostream& operator << (std::ostream& os, const Movie& movie) {
       os << std::setw(40) << movie.movieTitle << " | "; 
       os << std::setw(4) << movie.movieYear << " | ";
-      os << movie.movieDescription;
+      os << movie.movieDescription << std::endl;
+
+      return os;
    }
 }
