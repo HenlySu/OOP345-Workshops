@@ -1,63 +1,37 @@
 #include <iostream>
 #include <string>
-#include <regex> //Included this library to remove white spaces
+#include <fstream>
+#include <iomanip>
 
 using namespace std;
 
 int main()
 {
-   std::string tempString = ("1234: John    ,  john@email.com  ,           2,   3,    5");
-   std::regex removingWhiteSpaces("\\s+"); //Regex to remove whitespaces
+   std::ifstream file("books.txt");
+   std::string line{};
 
-   tempString = std::regex_replace(tempString, removingWhiteSpaces, "");
+   std::string bad[6];
+   std::string good[6];
 
-   std::string reservationID{};
-   std::string reservationName{};
-   std::string reservationEmail{};
-   int numPartyPeople{};
-   int reservationDay{};
-   int reservationHour{};
+      if (file) {
 
-   int starting = 0;
-   char semiColon = ':';
-   char comma = ',';
+         size_t i = 0;
 
-   //Reservation ID
-   size_t found = tempString.find(semiColon);
-   reservationID = tempString.substr(starting, found);
-   tempString.erase(starting, found + 1);
+         for(size_t i =0; i < 6; i++){
+            getline(file, bad[i], ' ');
+            bad[i].erase(0, bad[i].find_first_not_of(' '));
+            bad[i].erase(bad[i].find_last_not_of(' ') + 1);
 
-   //Reservation Name
-   found = tempString.find(comma);
-   reservationName = tempString.substr(starting, found);
-   tempString.erase(starting, found + 1);
+            getline(file, good[i], '\n');
+            good[i].erase(0, good[i].find_first_not_of(' '));
+            good[i].erase(good[i].find_last_not_of(' ') + 1);
+         }
+         file.close();
+      }
 
-   //Reservation Email
-   found = tempString.find(comma);
-   reservationEmail = tempString.substr(starting, found);
-   tempString.erase(starting, found + 1);
-
-   //Number of Part People
-   found = tempString.find(comma);
-   numPartyPeople = stoi(tempString.substr(starting, found));
-   tempString.erase(starting, found + 1);
-
-   //Reservation Day
-   found = tempString.find(comma);
-   reservationDay = stoi(tempString.substr(starting, found));
-   tempString.erase(starting, found + 1);
-
-   //Reservation Hour
-   found = tempString.find(comma);
-   reservationHour = stoi(tempString.substr(starting, found));
-   tempString.erase(starting, found + 1);
-
-   cout << "Reservation ID: " << reservationID << endl;
-   cout << "Reservation Name: " << reservationName << endl;
-   cout << "Reservation Email: " << reservationEmail << endl;
-   cout << "Number of Party People: " << numPartyPeople << endl;
-   cout << "Reservation Day: " << reservationDay << endl;
-   cout << "Reservation Hour: " << reservationHour << endl;
+   for (int i = 0; i < 6; i++) {
+      std::cout << setw(10) << left << bad[i] << setw(10) << right << good[i] << std::endl;
+   }
 
    return 0;
 }
