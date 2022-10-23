@@ -15,51 +15,18 @@ provided to complete the workshops and assignments.
 #include "Book.h"
 
 namespace sdds {
-
    Book::Book(const std::string& strBook) {
       std::string tempString = strBook;
-
-      size_t startingPosition = 0;
       char comma = ',';
-      char period = '.'; //For end of the sentence
+      char period = '.';
 
       trim(tempString);
-
-      //Need to create function for this LOL too lengthy
-
-      //For book author
-      size_t found = tempString.find(comma);
-      bookAuthor = tempString.substr(startingPosition, found);
-      tempString.erase(startingPosition, found + 1);
-      trim(bookAuthor);
-
-      //For book title
-      found = tempString.find(comma);
-      bookTitle = tempString.substr(startingPosition, found);
-      tempString.erase(startingPosition, found + 1);
-      trim(bookTitle);
-
-      //For book countr
-      found = tempString.find(comma);
-      bookCountry = tempString.substr(startingPosition, found);
-      tempString.erase(startingPosition, found + 1);
-      trim(bookCountry);
-
-      //For book price
-      found = tempString.find(comma);
-      bookPrice = stod(tempString.substr(startingPosition, found));
-      tempString.erase(startingPosition, found + 1);
-
-      //For book year
-      found = tempString.find(comma);
-      bookYear = std::stoi(tempString.substr(startingPosition, found));
-      tempString.erase(startingPosition, found + 1);
-
-      //For book description
-      found = tempString.find(period);
-      bookDescription = tempString.substr(startingPosition, found + 1);
-      tempString.erase(startingPosition, found + 1);
-      trim(bookDescription);
+      parseString(tempString, bookAuthor ,comma);
+      parseString(tempString, bookTitle, comma);
+      parseString(tempString, bookCountry, comma);
+      parseDouble(tempString, bookPrice, comma);
+      parseInt(tempString, bookYear, comma);
+      parseString(tempString, bookDescription, period);
    }
 
    const std::string& Book::title() const {
@@ -94,5 +61,24 @@ namespace sdds {
    auto Book::trim(std::string& str) -> void {
       std::regex regularExpression("^\\s+|\\s+$"); // remove leading and trailing spaces
       str = std::regex_replace(str, regularExpression, "");
+   }
+
+   void Book::parseString(std::string& line, std::string& objLine, char& delimeter) {
+      size_t found = line.find(delimeter);
+      (delimeter != '.') ? objLine = line.substr(0, found) : objLine = line.substr(0, found + 1); //Keeping period for description
+      line.erase(0, found + 1);
+      trim(objLine);
+   }
+
+   void Book::parseDouble(std::string& line, double& into, char& delimeter) {
+      size_t found = line.find(delimeter);
+      into = stod(line.substr(0, found));
+      line.erase(0, found + 1);
+   }
+
+   void Book::parseInt(std::string& line, size_t& into, char& delimeter) {
+      size_t found = line.find(delimeter);
+      into = stoi(line.substr(0, found));
+      line.erase(0, found + 1);
    }
 }

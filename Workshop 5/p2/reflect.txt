@@ -12,7 +12,7 @@ for functors and lambdas are as follows:
 
    //Functor
    ----------------------------------------
-   void operator (int a) {
+   void operator (int a) {                 //Written in side a class
       //code written here
    }
 

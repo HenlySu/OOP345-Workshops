@@ -32,6 +32,10 @@ namespace sdds {
       const size_t& year() const;
       auto price() -> double&;
 
+      void parseString(std::string& line, std::string& into, char& delimeter);
+      void parseDouble(std::string& line, double& into, char& delimeter);
+      void parseInt(std::string& line, size_t& into, char& delimeter);
+
       friend auto operator << (std::ostream& os, Book& obj)->std::ostream&;
       static auto trim(std::string& str) -> void;
    

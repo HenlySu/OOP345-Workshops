@@ -8,6 +8,7 @@ provided to complete the workshops and assignments.
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 
@@ -31,7 +32,6 @@ namespace sdds {
       else {
          throw "Bad file name!";
       }
-      
       file.close();
    }
 
@@ -39,13 +39,16 @@ namespace sdds {
       for (size_t i = 0; i < 6; i++) {
          while (text.find(m_badWords[i]) != std::string::npos) {
             text.replace(text.find(m_badWords[i]), m_badWords[i].size(), m_goodWords[i]);
-            cnt++;
+            cnt[i]++;
          }
       }
    }
 
    void SpellChecker::showStatistics(std::ostream& os) const {
       os << "Spellchecker Statistics\n";
-      os << "BAD_WORD: " << cnt << " replacements\n";
+      //os << "BAD_WORD: " << cnt << " replacements\n";
+      for (size_t i = 0; i < 6; i++) {
+         os << std::setw(15) << std::right << m_badWords[i] << ": " << cnt[i] << " replacements\n";
+      }
    }
 }
