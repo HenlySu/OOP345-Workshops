@@ -4,8 +4,47 @@
 #include "van.h"
 
 namespace sdds {
-   Van::Van(std::istream& is){
-   
+   Van::Van(std::istream& is){         //Needs trimming
+      std::string line{};
+      std::string tag{};
+      std::string something{};
+      size_t found{};
+
+      std::getline(is, line, '\n');
+
+      //For tag
+      found = line.find(',');
+      tag = line.substr(0, found);
+      line.erase(0, found + 1);
+
+      //For Maker
+      found = line.find(',');
+      m_maker = line.substr(0, found);
+      line.erase(0, found + 1);
+
+      //Type
+      found = line.find(',');
+      something = line.substr(0, found);
+
+      m_type = something[0];
+      line.erase(0, found + 1);
+
+      //Purpose
+      found = line.find(',');
+      something = line.substr(0, found);
+      m_purpose = something[0];
+      line.erase(0, found + 1);
+
+      //Condition
+      found = line.find(',');
+      something = line.substr(0, found);
+      m_condition = something[0];
+      line.erase(0, found + 1);
+
+      //Top speed
+      found = line.find('\n');
+      m_topSpeed = stoi(line.substr(0, found));
+      line.erase(0, found + 1);
    }
    
    std::string Van::condition() const{
@@ -68,5 +107,7 @@ namespace sdds {
       os << " | " << std::setw(12) << m_type;
       os << " | " << std::setw(12) << this->usage();
       os << " | " << std::setw(6) << this->condition();
+      os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
+      os << " |\n";
    }
 }

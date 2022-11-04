@@ -7,7 +7,7 @@
 namespace sdds{
    class Van : Vehicle {
       std::string m_maker{};
-      std::string m_type{};
+      char m_type{};
       char m_condition{};
       char m_purpose{};
       int m_topSpeed{};
