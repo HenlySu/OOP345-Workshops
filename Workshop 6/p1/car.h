@@ -15,5 +15,6 @@ namespace sdds{
       double topSpeed() const;
       void display(std::ostream& os) const;
    };
+   std::string& trim(std::string& str);
 }
 #endif //SDDS_CAR_H

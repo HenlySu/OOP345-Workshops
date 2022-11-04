@@ -9,8 +9,8 @@ namespace sdds{
       std::string m_maker{};
       std::string m_type{};
       char m_condition{};
-      std::string m_purpose{};
-      int topSpeed{};
+      char m_purpose{};
+      int m_topSpeed{};
    public:
       Van(std::istream& is);
       std::string condition() const;
