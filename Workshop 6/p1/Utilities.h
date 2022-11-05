@@ -5,9 +5,7 @@
 #include "Vehicle.h"
 
 namespace sdds {
-   class Utilities {
-      Vehicle* createInstance(std::istream& in);
-   };
+   Vehicle* createInstance(std::istream& in);
 }
 #endif // !SDDS_UTILITIES_H
 

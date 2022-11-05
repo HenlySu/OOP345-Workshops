@@ -10,7 +10,7 @@ namespace sdds {
       std::vector<Vehicle*> m_vehicles;
    public:
       Autoshop& operator += (Vehicle* theVehicle);
-      void displat(std::ostream os) const;
+      void display(std::ostream& os) const;
    };
 }
 #endif // !SDDS_AUTOSHOP_H

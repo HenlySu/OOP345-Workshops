@@ -2,7 +2,7 @@
 #include "Utilities.h"
 
 namespace sdds {
-   Vehicle* Utilities::createInstance(std::istream& in) {
+   Vehicle* createInstance(std::istream& in) {
 
    }
 }

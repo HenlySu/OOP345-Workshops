@@ -4,7 +4,8 @@
 #include "van.h"
 
 namespace sdds {
-   Van::Van(std::istream& is){         //Needs trimming
+   Van::Van(std::istream& is){
+
       std::string line{};
       std::string tag{};
       std::string something{};
@@ -15,29 +16,33 @@ namespace sdds {
       //For tag
       found = line.find(',');
       tag = line.substr(0, found);
+      trim(tag);
       line.erase(0, found + 1);
 
       //For Maker
       found = line.find(',');
       m_maker = line.substr(0, found);
+      trim(this->m_maker);
       line.erase(0, found + 1);
 
       //Type
       found = line.find(',');
       something = line.substr(0, found);
-
+      trim(something);
       m_type = something[0];
       line.erase(0, found + 1);
 
       //Purpose
       found = line.find(',');
       something = line.substr(0, found);
+      trim(something);
       m_purpose = something[0];
       line.erase(0, found + 1);
 
       //Condition
       found = line.find(',');
       something = line.substr(0, found);
+      trim(something);
       m_condition = something[0];
       line.erase(0, found + 1);
 
@@ -109,5 +114,11 @@ namespace sdds {
       os << " | " << std::setw(6) << this->condition();
       os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
       os << " |\n";
+   }
+
+   std::string& trim(std::string& str) {
+      str.erase(str.find_last_not_of(' ') + 1);
+      str.erase(0, str.find_first_not_of(' '));
+      return str;
    }
 }
