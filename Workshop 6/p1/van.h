@@ -5,7 +5,7 @@
 #include "Vehicle.h"
 
 namespace sdds{
-   class Van : Vehicle {
+   class Van : public Vehicle {
       std::string m_maker{};
       char m_type{};
       char m_condition{};
@@ -19,6 +19,5 @@ namespace sdds{
       std::string usage() const;
       void display(std::ostream& os) const;
     };
-   std::string& trim(std::string& str);
 }
 #endif //SDDS_VANS_H

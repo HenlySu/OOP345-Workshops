@@ -5,7 +5,7 @@
 #include "Vehicle.h"
 
 namespace sdds{
-   class Car : Vehicle{
+   class Car : public Vehicle{
       std::string m_maker{};
       char m_condition{};
       int m_topSpeed{};

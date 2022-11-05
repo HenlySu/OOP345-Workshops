@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include "van.h"
+#include "car.h"
 
 namespace sdds {
    Van::Van(std::istream& is){
@@ -114,11 +115,5 @@ namespace sdds {
       os << " | " << std::setw(6) << this->condition();
       os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
       os << " |\n";
-   }
-
-   std::string& trim(std::string& str) {
-      str.erase(str.find_last_not_of(' ') + 1);
-      str.erase(0, str.find_first_not_of(' '));
-      return str;
    }
 }
