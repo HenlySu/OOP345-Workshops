@@ -44,13 +44,13 @@ namespace sdds {
 
       switch (m_condition) {
       case 'n':
-         condition = "New";
+         condition = "new";
          break;
       case 'u':
-         condition = "Used";
+         condition = "used";
             break;
       case 'b':
-         condition = "Broken";
+         condition = "broken";
       }
 
       return condition;
@@ -61,8 +61,8 @@ namespace sdds {
    }
    
    void Car::display(std::ostream& os) const {
-      os << "| " << std::setw(10) << m_maker;
-      os << " | " << std::setw(6) << condition();
+      os << "| " << std::setw(10) << std::right << m_maker;
+      os << " | " << std::setw(6) << std::left << condition();
       os << " | " << std::setw(6) << std::setprecision(2) << std::fixed << m_topSpeed;
       os << " |\n";
    }

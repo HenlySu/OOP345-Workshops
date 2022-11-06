@@ -58,13 +58,13 @@ namespace sdds {
 
       switch (m_condition) {
       case 'n':
-         condition = "New";
+         condition = "new";
          break;
       case 'u':
-         condition = "Used";
+         condition = "used";
          break;
       case 'b':
-         condition = "Broken";
+         condition = "broken";
       }
 
       return condition;
@@ -109,10 +109,10 @@ namespace sdds {
    }
    
    void Van::display(std::ostream& os) const {
-      os << "| " << std::setw(8) << m_maker;
-      os << " | " << std::setw(12) << type();
-      os << " | " << std::setw(12) << usage();
-      os << " | " << std::setw(6) << condition();
+      os << "| " << std::setw(8) << std::right << m_maker;
+      os << " | " << std::setw(12) << std::left << type();
+      os << " | " << std::setw(12) << std::left << usage();
+      os << " | " << std::setw(6) << std::left << condition();
       os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
       os << " |\n";
    }
