@@ -10,7 +10,7 @@ namespace sdds{
       char m_type{};
       char m_condition{};
       char m_purpose{};
-      int m_topSpeed{};
+      double m_topSpeed{};
    public:
       Van(std::istream& is);
       std::string condition() const;

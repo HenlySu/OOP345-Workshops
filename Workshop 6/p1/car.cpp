@@ -22,8 +22,8 @@ namespace sdds {
 
       //Maker --------------------------------------------- Fine
       found = line.find(',');
-      this->m_maker = line.substr(0, found);
-      trim(this->m_maker);
+      m_maker = line.substr(0, found);
+      trim(m_maker);
       line.erase(0, found + 1);
 
       //Condition ----------------------------------------- Not sure
@@ -35,7 +35,7 @@ namespace sdds {
 
       //Top speed------------------------------------------- Fine
       found = line.find('\n');
-      this->m_topSpeed = stoi(line.substr(0, found));
+      m_topSpeed = stoi(line.substr(0, found));
       line.erase(0, found + 1);
    }
    
@@ -62,8 +62,8 @@ namespace sdds {
    
    void Car::display(std::ostream& os) const {
       os << "| " << std::setw(10) << m_maker;
-      os << " | " << std::setw(6) << this->condition();
-      os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
+      os << " | " << std::setw(6) << condition();
+      os << " | " << std::setw(6) << std::setprecision(2) << std::fixed << m_topSpeed;
       os << " |\n";
    }
 

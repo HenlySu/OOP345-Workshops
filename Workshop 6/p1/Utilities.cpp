@@ -5,13 +5,13 @@
 
 namespace sdds {
    Vehicle* createInstance(std::istream& in) {
-      std::string line{};
       Vehicle* pointer = nullptr;
+      char character{};
 
-      std::getline(in, line, '\n');
-      trim(line);
+      in >> std::ws;    //Discards leading whitespaces
+      character = in.peek();
 
-      switch (line[0]) {
+      switch (character) {
 
       case 'c':
       case 'C':

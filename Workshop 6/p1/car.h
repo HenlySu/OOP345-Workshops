@@ -8,7 +8,7 @@ namespace sdds{
    class Car : public Vehicle{
       std::string m_maker{};
       char m_condition{};
-      int m_topSpeed{};
+      double m_topSpeed{};
    public:
       Car(std::istream& is);
       std::string condition() const;

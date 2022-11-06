@@ -77,7 +77,7 @@ namespace sdds {
    std::string Van::type() const {
       std::string type = "";
 
-      switch (m_condition) {
+      switch (m_type) {
       case 'p':
          type = "pickup";
          break;
@@ -94,7 +94,7 @@ namespace sdds {
    std::string Van::usage() const {
       std::string type = "";
 
-      switch (m_condition) {
+      switch (m_purpose) {
       case 'd':
          type = "delivery";
          break;
@@ -110,9 +110,9 @@ namespace sdds {
    
    void Van::display(std::ostream& os) const {
       os << "| " << std::setw(8) << m_maker;
-      os << " | " << std::setw(12) << m_type;
-      os << " | " << std::setw(12) << this->usage();
-      os << " | " << std::setw(6) << this->condition();
+      os << " | " << std::setw(12) << type();
+      os << " | " << std::setw(12) << usage();
+      os << " | " << std::setw(6) << condition();
       os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
       os << " |\n";
    }
