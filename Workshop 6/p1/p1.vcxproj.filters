@@ -49,13 +49,13 @@
     <ClCompile Include="van.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="w6p1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Autoshop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="w6_p1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

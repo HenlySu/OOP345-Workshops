@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Utilities.h"
-#include "car.h"
-#include "van.h"
+#include "Car.h"
+#include "Van.h"
 
 namespace sdds {
    Vehicle* createInstance(std::istream& in) {

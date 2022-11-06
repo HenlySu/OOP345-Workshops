@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <iomanip>
-#include "van.h"
-#include "car.h"
+#include "Van.h"
+#include "Car.h"
 
 namespace sdds {
    Van::Van(std::istream& is){
