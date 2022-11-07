@@ -33,10 +33,24 @@ namespace sdds {
       m_condition = conditionString[0];
       line.erase(0, found + 1);
 
+      if (m_condition == ' ') {
+         m_condition = 'n';
+      }
+
+      if (m_condition != 'n' || m_condition != 'u' || m_condition != 'b') {
+         throw "Invalid Record";
+      }
+
+
       //Top speed------------------------------------------- Fine
       found = line.find('\n');
       m_topSpeed = stoi(line.substr(0, found));
       line.erase(0, found + 1);
+
+      if (std::isdigit(m_topSpeed) != true) {
+         throw "Invalid Record";
+      }
+
    }
    
    std::string Car::condition() const{
@@ -44,13 +58,13 @@ namespace sdds {
 
       switch (m_condition) {
       case 'n':
-         condition = "New";
+         condition = "new";
          break;
       case 'u':
-         condition = "Used";
+         condition = "used";
             break;
       case 'b':
-         condition = "Broken";
+         condition = "broken";
       }
 
       return condition;

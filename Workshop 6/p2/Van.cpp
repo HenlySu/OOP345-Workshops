@@ -33,6 +33,10 @@ namespace sdds {
       m_type = something[0];
       line.erase(0, found + 1);
 
+      if (m_type != 'p' || m_type != 'm' || m_type != 'c') {
+         throw "Invalid Record";
+      }
+
       //Purpose
       found = line.find(',');
       something = line.substr(0, found);
@@ -40,12 +44,24 @@ namespace sdds {
       m_purpose = something[0];
       line.erase(0, found + 1);
 
+      if (m_purpose != 'd' || m_purpose != 'p' || m_purpose != 'c') {
+         throw "Invalid Record";
+      }
+
       //Condition
       found = line.find(',');
       something = line.substr(0, found);
       trim(something);
       m_condition = something[0];
       line.erase(0, found + 1);
+
+      if (m_condition == ' ') {
+         m_condition = 'n';
+      }
+
+      if (m_condition != 'n' || m_condition != 'u' || m_condition != 'b') {
+         throw "Invalid Record";
+      }
 
       //Top speed
       found = line.find('\n');

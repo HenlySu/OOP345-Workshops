@@ -1,0 +1,22 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+We need to deallocated the memory that we create in vector because the vector doesn't
+deallocates the memory for us, so we have to code it ourselves manually. So to deallocate
+the memory I used a for loop to loop through the size of the vector and deallocated each 
+one of them and set them to a safe place, by setting them to nullptr. 
+
+Another way of checking if the input file represents a unknown type of vehicle or invalid
+data in the loadData() funtion is by doing a try and catch method. Everytime there is a 
+unknown type or invalid data we can throw an exception.
+
+In this workshop we had to use std::list<sdds::Vehicle*> and std::vector<sdds::Vehicle*>
+instead of std::list<sdds::Vehicle> and std::vector<sdds::Vehicle> because we are unable 
+to instantiate an interface class, which means that we are unable to instantiate such 
+a class.
