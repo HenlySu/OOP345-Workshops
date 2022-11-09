@@ -8,7 +8,6 @@ namespace sdds {
 
 		std::string line{};
 		std::string speed{};
-		size_t found = 0;
 
 		std::getline(is, line);
 

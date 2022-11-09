@@ -9,7 +9,7 @@ namespace sdds {
    }
 
    void Autoshop::display(std::ostream& os) const {
-      for (int i = 0; i < m_vehicles.size(); i++) {
+      for (size_t i = 0; i < m_vehicles.size(); i++) {
          m_vehicles[i]->display(os);
          os << std::endl;
       }

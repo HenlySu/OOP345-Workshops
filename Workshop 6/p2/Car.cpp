@@ -9,8 +9,6 @@ namespace sdds
 		std::getline(is, line);
 
 		std::string test{};
-		bool notDigit = false;
-
 		
 		delData(line, ',');						//Tag
 		getData(line, m_maker, ',');			//Maker

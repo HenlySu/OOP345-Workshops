@@ -10,8 +10,6 @@ namespace sdds {
 		std::getline(in, line);
 		trim(line);
 
-		size_t found = 0;
-
 		for (int i = 0; i < 6; i++) {
 			delData(line, ',');
 		}
