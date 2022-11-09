@@ -1,22 +1,31 @@
-#include <iostream>
-#include "Racecar.h"
+#include"Racecar.h"
 
 namespace sdds {
-   Racecar::Racecar(std::istream& in) : Car::Car(in) {
-      std::string line{};
 
-      std::getline(in, line);
-      if (std::stod(line) > 0 && std::stod(line) < 1) {
-         m_booster = std::stod(line);
-      }
-   }
+	Racecar::Racecar(std::istream& in) : Car(in) {
+		std::string line{};
 
-   void Racecar::display(std::ostream& out) const {
-      Car::display(out);
-      out << '*';
-   }
+		//Resets file to the beginning
+		in.seekg(std::ios_base::beg);
+		std::getline(in, line);
 
-   double Racecar::topSpeed() const {
-      return Car::topSpeed() * (1 * m_booster);
-   }
+		//Deletes the useless data to be able to read booster
+		for (int i = 0; i < 4; i++) {
+			delData(line, ',');
+		}
+
+		m_booster = stod(line);
+	}
+
+	void Racecar::display(std::ostream& out)const {
+
+		Car::display(out);
+		out << "*";
+
+	}
+
+	double Racecar::topSpeed()const {
+		return Car::topSpeed() * (1 + m_booster);
+	}
+
 }

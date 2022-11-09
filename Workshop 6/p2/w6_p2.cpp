@@ -24,12 +24,16 @@ void loadData(const char* filename, sdds::Autoshop& as)
 		//       - the record is not recognized: the first non-empty character
 		//           on the line is not 'c', 'C', 'r', 'R', 'v', 'V', 'l', or 'L'
 		//       - one of the fields in the record contains invalid data.
-		try {
+		try
+		{
 			sdds::Vehicle* aVehicle = sdds::createInstance(file);
-			if (aVehicle)
-				as += aVehicle;
-		} catch (std::invalid_argument& error) {
-			std::cerr << "error" << std::endl;
+			if (aVehicle) as += aVehicle;
+		}
+		catch (char character) {
+			std::cout << "Unrecognized record type: [" << character << "]" << std::endl;
+		}
+		catch (const char* msg) {
+			throw std::invalid_argument("Invalid record!");
 		}
 	}
 }

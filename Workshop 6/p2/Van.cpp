@@ -1,135 +1,95 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
 #include <iomanip>
 #include "Van.h"
 #include "Car.h"
 
 namespace sdds {
-   Van::Van(std::istream& is){
 
-      std::string line{};
-      std::string tag{};
-      std::string something{};
-      size_t found{};
+	Van::Van(std::istream& is) {
 
-      std::getline(is, line, '\n');
+		std::string line{};
+		std::string speed{};
+		size_t found = 0;
 
-      //For tag
-      found = line.find(',');
-      tag = line.substr(0, found);
-      trim(tag);
-      line.erase(0, found + 1);
+		std::getline(is, line);
 
-      //For Maker
-      found = line.find(',');
-      m_maker = line.substr(0, found);
-      trim(this->m_maker);
-      line.erase(0, found + 1);
+		delData(line, ',');						//Tag
+		getData(line, m_maker, ',');			//Maker
+		getData(line, m_type, ',');			//Type
+		getData(line, m_purpose, ',');		//Purpose
+		getData(line, m_condition, ',');		//Condition
+		getData(line, speed, ',');				//Safe speed
 
-      //Type
-      found = line.find(',');
-      something = line.substr(0, found);
-      trim(something);
-      m_type = something[0];
-      line.erase(0, found + 1);
+		isNum(speed, m_topSpeed);				//Speed
 
-      if (m_type != 'p' || m_type != 'm' || m_type != 'c') {
-         throw "Invalid Record";
-      }
+		//Checking for type
+		if (m_type != "p" && m_type != "m" && m_type != "c") {
+			throw std::invalid_argument("Invalid record!");
+		}
 
-      //Purpose
-      found = line.find(',');
-      something = line.substr(0, found);
-      trim(something);
-      m_purpose = something[0];
-      line.erase(0, found + 1);
+		//Checking for purpose
+		if (m_purpose != "d" && m_purpose != "p" && m_purpose != "c") {
+			throw std::invalid_argument("Invalid record!");
+		}
 
-      if (m_purpose != 'd' || m_purpose != 'p' || m_purpose != 'c') {
-         throw "Invalid Record";
-      }
+		//Setting and checking for condition
+		if (m_condition == "")
+			m_condition = "n";
 
-      //Condition
-      found = line.find(',');
-      something = line.substr(0, found);
-      trim(something);
-      m_condition = something[0];
-      line.erase(0, found + 1);
+		if (m_condition != "n" && m_condition != "u" && m_condition != "b") {
+			throw std::invalid_argument("Invalid record!");
+		}
+	}
 
-      if (m_condition == ' ') {
-         m_condition = 'n';
-      }
+	std::string Van::condition()const {
+		std::string condition{};
 
-      if (m_condition != 'n' || m_condition != 'u' || m_condition != 'b') {
-         throw "Invalid Record";
-      }
+		if (m_condition == "n")
+			condition = "new";
+		else if (m_condition == "u")
+			condition = "used";
+		else if (m_condition == "b")
+			condition = "broken";
 
-      //Top speed
-      found = line.find('\n');
-      m_topSpeed = stoi(line.substr(0, found));
-      line.erase(0, found + 1);
-   }
-   
-   std::string Van::condition() const{
-      std::string condition = "";
+		return condition;
+	}
 
-      switch (m_condition) {
-      case 'n':
-         condition = "New";
-         break;
-      case 'u':
-         condition = "Used";
-         break;
-      case 'b':
-         condition = "Broken";
-      }
+	std::string Van::type() const {
+		std::string type{};
 
-      return condition;
-   }
-   
-   double Van::topSpeed() const {
-      return m_topSpeed;
-   }
-   
-   std::string Van::type() const {
-      std::string type = "";
+		if (m_type == "p")
+			type = "pickup";
+		else if (m_type == "m")
+			type = "mini-bus";
+		else if (m_type == "c")
+			type = "camper";
+		
+		return type;
+	}
 
-      switch (m_type) {
-      case 'p':
-         type = "pickup";
-         break;
-      case 'm':
-         type = "mini-bus";
-         break;
-      case 'c':
-         type = "camper";
-      }
+	std::string Van::usage()const	{
+		std::string purpose{};
 
-      return type;
-   }
-   
-   std::string Van::usage() const {
-      std::string type = "";
+		if (m_purpose == "d")
+			purpose = "delivery";
+		else if (m_purpose == "p")
+			purpose = "passenger";
+		else if (m_purpose == "c")
+			purpose = "camping";
+		
+		return purpose;
+	}
 
-      switch (m_purpose) {
-      case 'd':
-         type = "delivery";
-         break;
-      case 'p':
-         type = "passenger";
-         break;
-      case 'c':
-         type = "camping";
-      }
+	double Van::topSpeed()const { 
+		return m_topSpeed; 
+	}
 
-      return type;
-   }
-   
-   void Van::display(std::ostream& os) const {
-      os << "| " << std::setw(8) << m_maker;
-      os << " | " << std::setw(12) << type();
-      os << " | " << std::setw(12) << usage();
-      os << " | " << std::setw(6) << condition();
-      os << " | " << std::setw(6) << std::setprecision(2) << m_topSpeed;
-      os << " |\n";
-   }
+	void Van::display(std::ostream& os)const {
+		os << "| " << std::setw(8) << m_maker;
+		os << " | " << std::setw(12) << std::left << type();
+		os << " | " << std::setw(12) << std::left << usage();
+		os << " | " << std::setw(6) << std::left << condition();
+		os << " | " << std::setw(6) << std::right << std::setprecision(2) << topSpeed();
+		os << " |";
+	}
+
 }

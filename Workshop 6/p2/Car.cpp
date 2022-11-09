@@ -1,89 +1,55 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
 #include <iomanip>
-#include "Car.h"
+#include"Car.h"
 
-namespace sdds {
-   Car::Car(std::istream& is){
+namespace sdds
+{
+	Car::Car(std::istream& is) {
 
-      //TAG,MAKER,CONDITION,TOP_SPEED
+		std::string line{};
+		std::getline(is, line);
 
-      std::string line{};
-      std::string conditionString{};
-      size_t found{};
-      std::string tag{};
+		std::string test{};
+		bool notDigit = false;
 
-      std::getline(is, line, '\n');
+		
+		delData(line, ',');						//Tag
+		getData(line, m_maker, ',');			//Maker
+		getData(line, m_condition, ',');		//Condition
+		getData(line, test, ',');				//Top speed
 
-      //For tag ------------------------------------------- Fine
-      found = line.find(',');
-      tag = line.substr(0, found);
-      line.erase(0, found + 1);
+		if (m_condition == "") 
+			m_condition = "n";
 
-      //Maker --------------------------------------------- Fine
-      found = line.find(',');
-      m_maker = line.substr(0, found);
-      trim(m_maker);
-      line.erase(0, found + 1);
+		if (m_condition != "n" && m_condition != "u" && m_condition != "b") {
+			throw std::invalid_argument("Invalid record!");
+		}
 
-      //Condition ----------------------------------------- Not sure
-      found = line.find(',');
-      conditionString = line.substr(0, found);
-      trim(conditionString);
-      m_condition = conditionString[0];
-      line.erase(0, found + 1);
+		isNum(test, m_topSpeed);
+	}
 
-      if (m_condition == ' ') {
-         m_condition = 'n';
-      }
+	std::string Car::condition() const {
+		std::string condition{};
 
-      if (m_condition != 'n' || m_condition != 'u' || m_condition != 'b') {
-         throw "Invalid Record";
-      }
+		if (m_condition == "n")
+			condition = "new";
 
+		else if (m_condition == "u")
+			condition = "used";
 
-      //Top speed------------------------------------------- Fine
-      found = line.find('\n');
-      m_topSpeed = stoi(line.substr(0, found));
-      line.erase(0, found + 1);
+		else if (m_condition == "b")
+			condition = "broken";
 
-      if (std::isdigit(m_topSpeed) != true) {
-         throw "Invalid Record";
-      }
+		return condition;
+	}
 
-   }
-   
-   std::string Car::condition() const{
-      std::string condition = "";
+	double Car::topSpeed() const {
+		return m_topSpeed; 
+	}
 
-      switch (m_condition) {
-      case 'n':
-         condition = "new";
-         break;
-      case 'u':
-         condition = "used";
-            break;
-      case 'b':
-         condition = "broken";
-      }
-
-      return condition;
-   }
-   
-   double Car::topSpeed() const{
-      return m_topSpeed;
-   }
-   
-   void Car::display(std::ostream& os) const {
-      os << "| " << std::setw(10) << m_maker;
-      os << " | " << std::setw(6) << condition();
-      os << " | " << std::setw(6) << std::setprecision(2) << std::fixed << m_topSpeed;
-      os << " |\n";
-   }
-
-   std::string& trim(std::string& str) {
-      str.erase(str.find_last_not_of(' ') + 1);
-      str.erase(0, str.find_first_not_of(' '));
-      return str;
-   }
+	void Car::display(std::ostream& os) const {
+		os << "| " << std::setw(10) << std::right << m_maker;
+		os << " | " << std::setw(6) << std::left << condition();
+		os << " | " << std::setw(6) << std::right << std::setprecision(2) << std::fixed << topSpeed();
+		os << " |";
+	}
 }

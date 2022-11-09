@@ -2,23 +2,27 @@
 #ifndef SDDS_VANS_H
 #define SDDS_VANS_H
 
-#include "Vehicle.h"
+#include"Vehicle.h"
 
-namespace sdds{
-   class Van : public Vehicle {
-      std::string m_maker{};
-      char m_type{};
-      char m_condition{};
-      char m_purpose{};
-      double m_topSpeed{};
-   public:
-      Van() = default;
-      Van(std::istream& is);
-      std::string condition() const;
-      double topSpeed() const;
-      std::string type() const;
-      std::string usage() const;
-      void display(std::ostream& os) const;
-    };
+namespace sdds {
+	class Van :public Vehicle {
+		std::string m_maker{};
+		std::string m_type{};
+		std::string m_condition{};
+		std::string m_purpose{};
+		double m_topSpeed{};
+	public:
+		Van() = default;
+		Van(std::istream& is);
+		
+		std::string condition()const;
+		std::string type() const;
+		std::string usage()const;
+
+		double topSpeed()const;
+		void display(std::ostream& os)const;
+	};
+
 }
-#endif //SDDS_VANS_H
+
+#endif // !SDDS_VANS_H
