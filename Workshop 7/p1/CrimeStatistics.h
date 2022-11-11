@@ -17,7 +17,9 @@ namespace sdds {
    };
 
    class CrimeStatistics {
-      std::vector<Crime*> m_crimes{};
+      std::vector<Crime> m_crimes{};
+
+      void trim(std::string& str);
    public:
       CrimeStatistics(const char* filename);
       void display(std::ostream& os) const;
