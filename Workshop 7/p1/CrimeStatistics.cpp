@@ -17,23 +17,24 @@ namespace sdds {
       Crime crime;
 
       if (file) {
-         while (file) {
+         while (!file.eof()) {
             std::getline(file, line);
 
             //Need to fix
             trim(crime.m_province = line.substr(0, 25));
             trim(crime.m_district = line.substr(25, 25));
-            trim(crime.m_crime = line.substr(50, 50));
+            trim(crime.m_crime = line.substr(50, 25));
 
-            crime.m_year = std::stoi(line.substr(75, 80));
-            crime.m_numCases = std::stoi(line.substr(80, 85));
-            crime.m_resolved = std::stoi(line.substr(85, 90));
+            crime.m_year = std::stoi(line.substr(75, 5));
+            crime.m_numCases = std::stoi(line.substr(80, 5));
+            crime.m_resolved = std::stoi(line.substr(85, 5));
 
             m_crimes.push_back(crime);
          }
       }
       else {
          //Throw error here
+         throw "ERROR: Cannot open file";
       }
    }
    void CrimeStatistics::display(std::ostream& os) const {
