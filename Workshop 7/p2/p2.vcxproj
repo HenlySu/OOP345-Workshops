@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="crimes.txt" />
+    <Text Include="reflect.txt" />
     <Text Include="sample_output.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

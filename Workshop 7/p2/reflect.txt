@@ -1,0 +1,38 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+THe STL that I used in this workshop is as follows:
+   - std::for_each()
+      I used this function to iterate through the vector or list of Crime objects.
+
+   - std::accumulate()
+      I used this function to count the total number of cases of the data.
+
+   - std::sort()
+      I used this function to sort the data in different orders.
+
+   - std::transform()
+      I used this function to change the crimes from "[None]" to ""
+
+   - std::any_of()
+      I used this function to check if the name was inside the container.
+
+   - std::copy_if
+      I used this function to extract a list of Crime that matches the crime name
+      given.
+   
+The advantages of using the STL algorithms compared to implementing them myself are
+they are optimized to be using with STL containers, more efficient, easier to read
+and they are more scalable. Meaning that it is easier to make bigger projects with 
+the use of the STL algorithms.
+
+In the sort function, it receives a parameter (the field) which would then sort the
+data by that field. Errors can occur when the parameter being entered is not a field
+in the data. I would design a try and catch method to avoid unknown fields being 
+entered.

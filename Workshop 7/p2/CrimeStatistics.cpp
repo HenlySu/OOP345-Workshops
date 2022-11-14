@@ -1,6 +1,16 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
 #include <fstream>
 #include <iomanip>
 #include <algorithm>
+#include <numeric>
 #include "CrimeStatistics.h"
 
 namespace sdds {
@@ -38,32 +48,53 @@ namespace sdds {
    }
 
    void CrimeStatistics::display(std::ostream& os) const {
-      //Lambda
+
       auto print = [&os](const Crime crime) { os << crime << std::endl; };
+
+      auto countCases = std::accumulate(m_crimes.begin(), m_crimes.end(), size_t(0u), [](size_t num, const Crime crime) { return num += crime.m_numCases; });
+      auto totalCases = std::accumulate(m_crimes.begin(), m_crimes.end(), size_t(0u), [](size_t num, const Crime crime) { return num += crime.m_resolved; });
+
       std::for_each(m_crimes.begin(), m_crimes.end(), print);
 
-      //Need to calculate total cases and resolved cases
+      os << std::setw(89) << std::setfill('-') << '\n';
+      os << std::setfill(' ');
+      os << "| " << std::setw(79) << "Total Crimes:  " << countCases << " |" << std::endl;
+      os << "| " << std::setw(79) << "Total Resolved Cases:  " << totalCases << " |" << std::endl;
    }
 
    void CrimeStatistics::sort(std::string name) {
-      //Need to complete
+      if (name == "Province") {
+         auto sortProvince = [](const Crime crime, const Crime crime2) { return crime.m_province < crime2.m_province; };
+         std::sort(m_crimes.begin(), m_crimes.end(), sortProvince);
+      }
+      else if (name == "Crime") {
+         auto sortCrime = [](const Crime crime, const Crime crime2) { return crime.m_crime < crime2.m_crime; };
+         std::sort(m_crimes.begin(), m_crimes.end(), sortCrime);
+      }
+      else if (name == "Cases") {
+         auto sortCases = [](const Crime crime, const Crime crime2) { return crime.m_numCases < crime2.m_numCases; };
+         std::sort(m_crimes.begin(), m_crimes.end(), sortCases);
+      }
+      else if (name == "Resolved") {
+         auto sortResolved = [](const Crime crime, const Crime crime2) { return crime.m_resolved < crime2.m_resolved; };
+         std::sort(m_crimes.begin(), m_crimes.end(), sortResolved);
+      }
    }
 
    void CrimeStatistics::cleanList() {
-      //Lambda
-      auto removeToken = [](Crime& crime) { if (crime.m_crime == "[None]") { crime.m_crime = ""; } };
-
-      std::for_each(m_crimes.begin(), m_crimes.end(), removeToken);
+      auto removeToken = [](Crime& crime) { if (crime.m_crime == "[None]") { crime.m_crime.clear(); } return crime; };
+      std::transform(m_crimes.begin(), m_crimes.end(), m_crimes.begin(), removeToken);
    }
 
-   bool CrimeStatistics::inCollection(std::string crime) const {
-      auto recInCollection = [crime](const Crime crimes) { return (crimes.m_crime == crime); };
-
-      std::for_each(m_crimes.begin(), m_crimes.end(), recInCollection);
+   bool CrimeStatistics::inCollection(std::string name) const {
+      return std::any_of(m_crimes.begin(), m_crimes.end(), [name](const Crime crime) { return crime.m_crime == name; });
    }
 
-   std::list<Crime> CrimeStatistics::getListForProvince() const {
-      //Need to complete
+   std::list<Crime> CrimeStatistics::getListForProvince(std::string name) const {      
+      std::list<Crime> list;
+      std::copy_if(m_crimes.begin(), m_crimes.end(), std::back_inserter(list), [name](const Crime crime) { return crime.m_province == name; });
+
+      return list;
    }
 
    //Helper
