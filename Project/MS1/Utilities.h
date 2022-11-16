@@ -18,5 +18,6 @@ namespace sdds {
       static void setDelimiter(char newDelimeter);
       static char getDelimeter();
    };
+   std::string& trim(std::string& str);
 }
 #endif // !SDDS_UTILITIES_H

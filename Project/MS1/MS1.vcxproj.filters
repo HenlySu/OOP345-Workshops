@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Station1.txt">
+    <Text Include="Stations1.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Station2.txt">
+    <Text Include="Stations2.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="ms1_output.txt">

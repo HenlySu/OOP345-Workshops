@@ -2,8 +2,6 @@
 #ifndef SDDS_STATION_H
 #define SDDS_STATION_H
 
-#include <iostream>
-
 namespace sdds {
    class Station {
       size_t m_id{};
@@ -12,8 +10,8 @@ namespace sdds {
       size_t m_serialNum{};
       size_t m_quantity{};
 
-      size_t m_widthField = 0;
-      size_t id_generator = 0;
+      static size_t m_widthField;
+      static size_t id_generator;
    public:
       Station(const std::string& singleRecord);
       const std::string& getItemName() const;
