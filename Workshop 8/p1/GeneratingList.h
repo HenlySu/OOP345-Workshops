@@ -35,9 +35,22 @@ namespace sdds {
 		//TODO: Implement the Luhn Algorithm to check the 
 		//      valadity of SIN No's
 
+		bool validation_Luhn_ALgorithm(std::string& str) {
+			//Need to read up on Luhn Algorithm
+		}
+
+		//=================================================
+
+
 
 		//TODO: Overload the += operator with a raw pointer
 		// as a second operand.
+
+		void operator += (T* obj) {
+			list.push_back(obj);
+		}
+
+		//=================================================
 
 
 		void print(std::ostream& os) const {

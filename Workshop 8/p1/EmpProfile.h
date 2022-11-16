@@ -77,12 +77,19 @@ namespace sdds {
 			}
 		}
 
-		//TODO: add a function here to check correct salary range
-
 		void print(std::ostream& os)const {
 			os << std::setw(15) << name << std::setw(10) << m_salary << std::endl;
 		}
 
+		//TODO: add a function here to check correct salary range
+
+		void rangeValidator() {
+			if (m_salary > 99999 || m_salary < 0) {
+				throw "ERROR: *** Employees salaray range is not valid";
+			}
+		}
+
+		//=======================================================
 	};
 }
 #endif // !SDDS_EMPPROFILE_H

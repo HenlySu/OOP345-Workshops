@@ -29,7 +29,7 @@
     <None Include="CorrectSalary.dat">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="NamesSin.dat">
+    <None Include="NamesSIN.dat">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="WrongSalary.dat">

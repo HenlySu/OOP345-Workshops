@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CorrectSalary.dat" />
-    <None Include="NamesSin.dat" />
+    <None Include="NamesSIN.dat" />
     <None Include="sample_output.txt" />
     <None Include="WrongSalary.dat" />
   </ItemGroup>
