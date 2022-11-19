@@ -1,0 +1,33 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+On this workshop we were tasked to used raw and smart pointers. While doing the
+workshop I had the opportunity to learn more about raw pointers smart pointers
+and the difference between them. So basically smart pointers are class objects 
+that behave like raw pointers but they manage the memory. Meaning that it would 
+automatically deallocate the memory when it goes out of scope.While on the other
+hand, with raw pointers, we need to implement code to deallocate the memory that
+we allocated.
+
+The difference between the raw and smart pointer syntax can be seen below in the
+two functions that we created in the workshop:
+
+//From the write raw function
+   EmployeeWage* empWage = new EmployeeWage(emp[i].name, sal[j].salary);
+   empWage->rangeValidator();
+   activeEmp += *empWage;
+
+//From the writeSmart function
+   std::unique_ptr<EmployeeWage> empWage(new EmployeeWage(emp[i].name, sal[j].salary));
+	empWage->rangeValidator();
+	activeEmp += *empWage;
+
+Note that when we are creating the smart pointer, we created it using the 
+std::unique_ptr<EmplyeeWage>. This is because we are created a smart pointer of type
+EmployeeWage. By doing it this way the deallocation of the memory is automatic.
