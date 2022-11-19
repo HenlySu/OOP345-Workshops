@@ -74,8 +74,8 @@ namespace sdds {
 		//TODO: Overload the += operator with a raw pointer
 		// as a second operand.
 
-		void operator += (T* obj) {
-			list.push_back(*obj);
+		void operator += (T& obj) {
+			list.push_back(obj);
 		}
 
 		//=================================================
