@@ -32,13 +32,33 @@ namespace sdds {
 		size_t size() const { return list.size(); }
 		const T& operator[](size_t i) const { return list[i]; }
 
+
 		//TODO: Implement the Luhn Algorithm to check the 
 		//      valadity of SIN No's
 
-		bool validation_Luhn_ALgorithm(std::string& str) {
-			//Need to read up on Luhn Algorithm
-		}
+		bool validation_Luhn_ALgorithm(const std::string& str) {
 
+			bool valid = false;
+			size_t total = 0;
+
+			for (size_t i = 0; i < str.length(); i++) {
+
+				size_t num = str[i] - '0';
+				
+				if (i % 2 != 0) {
+					num *= 2;
+
+					if (num > 9) {
+						num -= 9;
+					}
+				}
+
+				total += num;
+
+				if ((total % 10) == 0) valid = true;
+			}
+			return valid;
+		}
 		//=================================================
 
 
@@ -47,7 +67,7 @@ namespace sdds {
 		// as a second operand.
 
 		void operator += (T* obj) {
-			list.push_back(obj);
+			list.push_back(*obj);
 		}
 
 		//=================================================
