@@ -24,10 +24,10 @@ namespace sdds {
 					if (!activeEmp.validation_Luhn_ALgorithm(emp[i].id))
 						throw std::string("Error!");
 
-					EmployeeWage* empWage = new EmployeeWage(emp[i].name, sal[j].salary);
-					empWage->rangeValidator();
+					EmployeeWage empWage(emp[i].name, sal[j].salary);
+					empWage.rangeValidator();
 
-					activeEmp += *empWage;
+					activeEmp += empWage;
 				}
 			}
 		}
