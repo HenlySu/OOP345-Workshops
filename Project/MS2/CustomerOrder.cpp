@@ -1,3 +1,11 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -43,9 +51,11 @@ namespace sdds {
       if (this != &customerOrder) {
          
          //Deleting first
-         for (size_t i = 0; i < m_cntItem; i++) {
-            delete m_lstItem[i];
-            m_lstItem[i] = nullptr;
+         if (m_lstItem != nullptr) {
+            for (size_t i = 0; i < m_cntItem; i++) {
+               delete m_lstItem[i];
+               m_lstItem[i] = nullptr;
+            }
          }
          delete[] m_lstItem;
          m_lstItem = nullptr;
@@ -68,12 +78,10 @@ namespace sdds {
 
    //Destructor
    CustomerOrder::~CustomerOrder() {
-
-      //Something not working here
-      /*for (size_t i = 0; i < m_cntItem - 1; i++) {
+      for (size_t i = 0; i < m_cntItem; i++) {
          delete m_lstItem[i];
-         m_lstItem = nullptr;
-      }*/
+         m_lstItem[i] = nullptr;
+      }
 
       delete[] m_lstItem;
       m_lstItem = nullptr;
@@ -106,6 +114,7 @@ namespace sdds {
    void CustomerOrder::fillItem(Station& station, std::ostream& os) {
 
       bool filled = false;
+
       for (size_t i = 0; i < m_cntItem; i++) {
          if (m_lstItem[i]->m_itemName == station.getItemName() && m_lstItem[i]->m_isFilled == filled) {
             if (station.getQuantity() > 0) {
@@ -114,10 +123,10 @@ namespace sdds {
                m_lstItem[i]->m_isFilled = true;
                filled = true;
 
-               os << "Filled " << m_name << ", " << m_product << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+               os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
             } 
             else {
-               os << "Unable to fill " << m_name << ", " << m_product << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+               os << "Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
             }
          }
       }
