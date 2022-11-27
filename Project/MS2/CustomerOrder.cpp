@@ -7,15 +7,17 @@ provided to complete the workshops and assignments.
 */
 
 #include <iostream>
+#include <algorithm>
 #include <iomanip>
 #include <string>
+
 
 #include "CustomerOrder.h"
 #include "Utilities.h"
 
 namespace sdds {
 
-   size_t CustomerOrder::m_widthField{};
+   size_t CustomerOrder::m_widthField = 0u;
 
    CustomerOrder::CustomerOrder(const std::string str) {
       Utilities util;
@@ -137,7 +139,7 @@ namespace sdds {
 
       for (size_t i = 0; i < m_cntItem; i++) {
          os << "[" << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
-         os << std::setw(m_widthField) << std::setfill(' ') << m_lstItem[i]->m_itemName;
+         os << std::setw(m_widthField + 2) << std::setfill(' ') << m_lstItem[i]->m_itemName;
          os << " - ";
          os << (m_lstItem[i]->m_isFilled == true ? "FILLED" : "TO BE FILLED");
          os << std::endl;
