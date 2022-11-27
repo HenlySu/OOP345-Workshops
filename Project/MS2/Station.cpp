@@ -25,6 +25,7 @@ namespace sdds {
 
       //Updates the width before extracting description
       m_widthField = m_widthField > util.getFieldWidth() ? m_widthField : util.getFieldWidth();
+
       m_description = util.extractToken(singleRecord, position, more);
    }
 

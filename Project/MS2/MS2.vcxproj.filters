@@ -46,7 +46,10 @@
     <Text Include="Stations2.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="CustomerOrder.txt">
+    <Text Include="CustomerOrders.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="sample_output.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

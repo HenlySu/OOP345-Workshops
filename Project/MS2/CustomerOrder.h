@@ -2,6 +2,8 @@
 #ifndef SDDS_CUSTOMERORDER_H
 #define SDDS_CUSTOMERORDER_H
 
+#include "Station.h"
+
 namespace sdds {
 
 	struct Item {
@@ -24,7 +26,7 @@ namespace sdds {
 		CustomerOrder(const std::string str);
 
 		//Copy
-		CustomerOrder(const CustomerOrder& customOrder) = delete;
+		CustomerOrder(const CustomerOrder& customOrder);
 		CustomerOrder& operator = (const CustomerOrder& customerOrder) = delete;
 		
 		//Move
