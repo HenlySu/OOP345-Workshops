@@ -1,6 +1,18 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <thread>
+#include <mutex>
+
 #include "TreasureMap.h"
 
 namespace sdds {
@@ -56,7 +68,6 @@ namespace sdds {
          //         then each of the rows of the map.
          //       If the file cannot be open, raise an exception to
          //         inform the client.
-
          std::fstream file(filename, std::ios::binary | std::ios::out);
 
          if (file) {
@@ -118,10 +129,20 @@ namespace sdds {
       size_t count = 0;
 
       // TODO: For part 2, comment this "for" loop and write the multihreaded version.
-      for (size_t i = 0; i < rows; ++i) {
-         count += digForTreasure(map[i], mark);
+      
+      std::thread* threads = new std::thread[rows];
+
+      for (size_t i = 0; i < rows; i++) {
+         threads[i] = std::thread([&](size_t index) { count += digForTreasure(map[index], mark); }, i);
       }
 
+      size_t i = 0;
+      while (i < rows) {
+         threads[i].join();
+         i++;
+      }
+
+      delete[] threads;
       return count;
    }
 }

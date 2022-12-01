@@ -1,0 +1,33 @@
+/*
+Name:			Henly Su
+Student ID:	143334183
+Email:		hsu31@myseneca.ca
+
+I have done all the coding by myself and only copied the code that my professor
+provided to complete the workshops and assignments.
+*/
+
+The reason why we use binary files in this workshop is that binary files are 
+smaller than regular text files and it is faster to write and read. I didn't use
+the bind fuction in this workshop because I didn't see the need to. The bind function
+is used to manipulate the position and number of values used by the function and 
+modifies the function according to the desired output. The advantange of using 
+multiple threads are they are so much more faster because different CPUs can run
+different threads created by the program. So essentially the work is divided into
+many smaller pieces. It is like working in a group to complete a big task. The way 
+that I implemented multi-threading in this workshop can be seen in the findTreasure
+function.
+
+      std::thread* threads = new std::thread[rows];
+
+      for (size_t i = 0; i < rows; i++) {
+         threads[i] = std::thread([&](size_t index) { count += digForTreasure(map[index], mark); }, i);
+      }
+
+      size_t i = 0;
+      while (i < rows) {
+         threads[i].join();
+         i++;
+      }
+
+      delete[] threads;
