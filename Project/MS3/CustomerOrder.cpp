@@ -11,7 +11,6 @@ provided to complete the workshops and assignments.
 #include <iomanip>
 #include <string>
 
-
 #include "CustomerOrder.h"
 #include "Utilities.h"
 
@@ -128,7 +127,7 @@ namespace sdds {
                os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
             } 
             else {
-               os << "Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
+               os << "    Unable to fill " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
             }
          }
       }
@@ -138,8 +137,8 @@ namespace sdds {
       os << m_name << " - " << m_product << std::endl;
 
       for (size_t i = 0; i < m_cntItem; i++) {
-         os << "[" << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
-         os << std::setw(m_widthField + 2) << std::setfill(' ') << m_lstItem[i]->m_itemName;
+         os << "[" << std::right << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
+         os << std::left << std::setw(m_widthField + 2) << std::setfill(' ') << m_lstItem[i]->m_itemName;
          os << " - ";
          os << (m_lstItem[i]->m_isFilled == true ? "FILLED" : "TO BE FILLED");
          os << std::endl;

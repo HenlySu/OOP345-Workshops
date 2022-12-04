@@ -64,5 +64,8 @@
     <Text Include="AssemblyLine.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="sample_output.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
